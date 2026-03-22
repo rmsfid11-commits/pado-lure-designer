@@ -12,9 +12,10 @@ Create a stunning, photorealistic 3D-rendered product image of a fishing lure.
 - Ultra-sharp details: hooks, split rings, realistic eyes, paint finish, holographic patterns
 - The lure should look like it belongs in a premium product catalog
 
-Lure description: ${desc}
+CRITICAL DESIGN REQUIREMENTS (YOU MUST FOLLOW EVERY DETAIL BELOW):
+${desc}
 
-Important: Generate ONLY the lure image. No text, no labels, no watermarks.`,
+Important: Generate ONLY the lure image. No text, no labels, no watermarks. You MUST incorporate ALL design details mentioned above.`,
 
   blueprint: (desc) => `You are a professional fishing lure engineer creating a technical blueprint/specification sheet.
 Create a technical drawing on graph paper (light blue grid lines) showing a fishing lure in exactly 4 orthographic views arranged in a standard engineering layout:
@@ -32,9 +33,10 @@ Additional requirements:
 - Technical drawing style, precise and clean
 - Title block in bottom right: "PADO LURE DESIGN"
 
-Lure description: ${desc}
+CRITICAL DESIGN REQUIREMENTS (YOU MUST FOLLOW EVERY DETAIL BELOW):
+${desc}
 
-Important: This must look like a real engineering blueprint/technical specification sheet.`,
+Important: This must look like a real engineering blueprint. You MUST incorporate ALL design details mentioned above.`,
 
   product: (desc) => `You are a professional fishing lure product photographer.
 Create a clean, commercial product photo of a fishing lure on a pure white background.
@@ -46,9 +48,10 @@ Create a clean, commercial product photo of a fishing lure on a pure white backg
 - Ready for e-commerce or Instagram product post
 - High-end commercial quality
 
-Lure description: ${desc}
+CRITICAL DESIGN REQUIREMENTS (YOU MUST FOLLOW EVERY DETAIL BELOW):
+${desc}
 
-Important: Generate ONLY the lure on white background. No text, no props, no other objects.`,
+Important: Generate ONLY the lure on white background. No text, no props. You MUST incorporate ALL design details mentioned above.`,
 
   threeD: (desc) => `You are a 3D fishing lure modeler creating a presentation sheet.
 Create a single image showing the SAME fishing lure from exactly 2 different angles side by side:
@@ -63,9 +66,10 @@ Requirements:
 - Ultra-realistic 3D rendering quality
 - Show hook details, eye detail, lip/bill, split rings
 
-Lure description: ${desc}
+CRITICAL DESIGN REQUIREMENTS (YOU MUST FOLLOW EVERY DETAIL BELOW):
+${desc}
 
-Important: Must show exactly 2 views of the same lure in one image. No text overlays.`,
+Important: Must show exactly 2 views of the same lure. You MUST incorporate ALL design details mentioned above.`,
 
   underwater: (desc) => `You are an underwater fishing photography specialist.
 Create a stunning underwater action shot of a fishing lure swimming through crystal clear water.
@@ -78,9 +82,10 @@ Create a stunning underwater action shot of a fishing lure swimming through crys
 - Dramatic underwater lighting
 - Photorealistic quality, like a GoPro underwater shot
 
-Lure description: ${desc}
+CRITICAL DESIGN REQUIREMENTS (YOU MUST FOLLOW EVERY DETAIL BELOW):
+${desc}
 
-Important: Generate an exciting underwater action scene. Make it look like a real underwater photo.`,
+Important: Generate an exciting underwater action scene. You MUST incorporate ALL lure design details mentioned above into the lure shown.`,
 
   package: (desc) => `You are a fishing lure packaging designer.
 Create a photorealistic image of a fishing lure in retail blister packaging.
@@ -95,9 +100,10 @@ Create a photorealistic image of a fishing lure in retail blister packaging.
 - Hanging hole at the top of the card
 - Premium quality packaging design
 
-Lure description: ${desc}
+CRITICAL DESIGN REQUIREMENTS (YOU MUST FOLLOW EVERY DETAIL BELOW):
+${desc}
 
-Important: Must look like a real commercial fishing lure package you'd find in a tackle shop.`,
+Important: Must look like a real commercial package. You MUST incorporate ALL lure design details mentioned above.`,
 
   colorVariants: (desc) => `You are a fishing lure color designer creating a color variation chart.
 Create a single image showing the SAME fishing lure in exactly 4 different color variations arranged in a 2x2 grid.
@@ -113,9 +119,10 @@ Requirements:
 - Small color name label under each lure
 - Professional product catalog layout
 
-Lure description: ${desc}
+CRITICAL DESIGN REQUIREMENTS (YOU MUST FOLLOW EVERY DETAIL BELOW):
+${desc}
 
-Important: Show exactly 4 color variations of the same lure design in one image.`,
+Important: Show exactly 4 color variations. You MUST incorporate ALL lure design details mentioned above.`,
 
   logo: (desc) => `You are a macro product photographer specializing in fishing lure branding.
 Create an extreme close-up macro photo of a fishing lure body showing engraved/printed brand details.
@@ -128,9 +135,10 @@ Create an extreme close-up macro photo of a fishing lure body showing engraved/p
 - You can see individual paint layers, clear coat reflection
 - Premium quality feel
 
-Lure description: ${desc}
+CRITICAL DESIGN REQUIREMENTS (YOU MUST FOLLOW EVERY DETAIL BELOW):
+${desc}
 
-Important: Focus on the brand engraving and surface detail. Extreme close-up macro shot.`,
+Important: Focus on brand engraving and surface detail. You MUST incorporate ALL lure design details mentioned above.`,
 
   free: (desc) => `${desc}
 
