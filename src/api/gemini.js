@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 // 텍스트로 루어 디자인 이미지 생성
 export async function generateLureFromText(prompt) {
   const model = genAI.getGenerativeModel({
-    model: 'gemini-2.0-flash-exp-image-generation',
+    model: 'gemini-2.0-flash-preview-image-generation',
     generationConfig: {
       responseModalities: ['TEXT', 'IMAGE'],
     },
@@ -25,7 +25,7 @@ Important: Generate only the lure image, no text overlays.`;
 // 스케치/사진 기반으로 루어 디자인 생성
 export async function generateLureFromImage(imageBase64, mimeType, prompt) {
   const model = genAI.getGenerativeModel({
-    model: 'gemini-2.0-flash-exp-image-generation',
+    model: 'gemini-2.0-flash-preview-image-generation',
     generationConfig: {
       responseModalities: ['TEXT', 'IMAGE'],
     },
