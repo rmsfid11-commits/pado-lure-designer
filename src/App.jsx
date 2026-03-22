@@ -1,6 +1,13 @@
 import { useState, useRef } from 'react';
-import { generateLureFromText, generateLureFromImage } from './api/gemini';
+import { generateFromText, generateFromImage } from './api/gemini';
 import './App.css';
+
+const LURE_MODES = [
+  { id: 'rendering', label: '렌더링', desc: '제품 사진 스타일' },
+  { id: 'blueprint', label: '설계도', desc: '4면도 + 규격' },
+  { id: 'product', label: '제품 이미지', desc: '흰 배경 제품샷' },
+  { id: 'threeD', label: '3D 뷰', desc: '대각 + 측면 2장' },
+];
 
 function App() {
   const [prompt, setPrompt] = useState('');
@@ -9,8 +16,9 @@ function App() {
   const [gallery, setGallery] = useState([]);
   const [previewImage, setPreviewImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
-  const [activeTab, setActiveTab] = useState('create');
+  const [activeTab, setActiveTab] = useState('lure');
   const [viewImage, setViewImage] = useState(null);
+  const [mode, setMode] = useState('rendering');
   const fileInputRef = useRef(null);
 
   const handleFileSelect = (e) => {
@@ -34,13 +42,14 @@ function App() {
     if (!prompt.trim() && !imageFile) return;
     setLoading(true);
     setResult(null);
+    const currentMode = activeTab === 'free' ? 'free' : mode;
     try {
       let res;
       if (imageFile) {
         const base64 = await fileToBase64(imageFile);
-        res = await generateLureFromImage(base64, imageFile.type, prompt);
+        res = await generateFromImage(base64, imageFile.type, prompt, currentMode);
       } else {
-        res = await generateLureFromText(prompt);
+        res = await generateFromText(prompt, currentMode);
       }
       setResult(res);
     } catch (err) {
@@ -53,11 +62,13 @@ function App() {
 
   const handleSave = () => {
     if (!result?.imageData) return;
+    const currentMode = activeTab === 'free' ? 'free' : mode;
     setGallery((prev) => [
       {
         id: Date.now(),
         imageData: result.imageData,
         prompt,
+        mode: currentMode,
         createdAt: new Date().toLocaleString('ko-KR'),
       },
       ...prev,
@@ -79,6 +90,10 @@ function App() {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
+  const isLureTab = activeTab === 'lure';
+  const isFreeTab = activeTab === 'free';
+  const isGalleryTab = activeTab === 'gallery';
+
   return (
     <div className="app">
       <header className="header">
@@ -88,28 +103,54 @@ function App() {
 
       <nav className="tabs">
         <button
-          className={activeTab === 'create' ? 'active' : ''}
-          onClick={() => setActiveTab('create')}
+          className={isLureTab ? 'active' : ''}
+          onClick={() => { setActiveTab('lure'); handleClear(); }}
         >
-          디자인 생성
+          루어 디자인
         </button>
         <button
-          className={activeTab === 'gallery' ? 'active' : ''}
+          className={isFreeTab ? 'active' : ''}
+          onClick={() => { setActiveTab('free'); handleClear(); }}
+        >
+          자유 생성
+        </button>
+        <button
+          className={isGalleryTab ? 'active' : ''}
           onClick={() => setActiveTab('gallery')}
         >
           갤러리 ({gallery.length})
         </button>
       </nav>
 
-      {activeTab === 'create' && (
+      {(isLureTab || isFreeTab) && (
         <main className="main">
           <div className="input-section">
+            {/* 루어 모드 선택 */}
+            {isLureTab && (
+              <div className="mode-selector">
+                {LURE_MODES.map((m) => (
+                  <button
+                    key={m.id}
+                    className={`mode-btn ${mode === m.id ? 'active' : ''}`}
+                    onClick={() => setMode(m.id)}
+                  >
+                    <span className="mode-label">{m.label}</span>
+                    <span className="mode-desc">{m.desc}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+
             <div className="input-group">
-              <label>루어 설명</label>
+              <label>{isLureTab ? '루어 설명' : '이미지 설명'}</label>
               <textarea
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
-                placeholder="예: 5cm 미노우, 빨간색 바디에 금색 홀로그램 패턴, 리얼한 눈알, 트레블 훅 2개"
+                placeholder={
+                  isLureTab
+                    ? '예: 5cm 미노우, 빨간색 바디에 금색 홀로그램 패턴, 리얼한 눈알, 트레블 훅 2개'
+                    : '예: 석양이 지는 바다 위 낚시배, 유화 스타일'
+                }
                 rows={4}
               />
             </div>
@@ -145,7 +186,7 @@ function App() {
                 onClick={handleGenerate}
                 disabled={loading || (!prompt.trim() && !imageFile)}
               >
-                {loading ? '생성 중...' : '루어 디자인 생성'}
+                {loading ? '생성 중...' : isLureTab ? '루어 디자인 생성' : '이미지 생성'}
               </button>
               <button className="btn-clear" onClick={handleClear}>
                 초기화
@@ -156,7 +197,7 @@ function App() {
           {loading && (
             <div className="loading">
               <div className="spinner"></div>
-              <p>AI가 루어를 디자인하고 있어요...</p>
+              <p>{isLureTab ? 'AI가 루어를 디자인하고 있어요...' : 'AI가 이미지를 생성하고 있어요...'}</p>
             </div>
           )}
 
@@ -166,7 +207,7 @@ function App() {
               <div className="result-image-wrap">
                 <img
                   src={result.imageData}
-                  alt="생성된 루어"
+                  alt="생성된 이미지"
                   className="result-image"
                   onClick={() => setViewImage(result.imageData)}
                 />
@@ -183,7 +224,7 @@ function App() {
         </main>
       )}
 
-      {activeTab === 'gallery' && (
+      {isGalleryTab && (
         <main className="gallery">
           {gallery.length === 0 ? (
             <div className="empty">
@@ -196,11 +237,12 @@ function App() {
                 <div key={item.id} className="gallery-item">
                   <img
                     src={item.imageData}
-                    alt="루어 디자인"
+                    alt="디자인"
                     onClick={() => setViewImage(item.imageData)}
                   />
                   <div className="gallery-info">
                     <p className="gallery-prompt">{item.prompt || '(설명 없음)'}</p>
+                    <span className="gallery-mode">{item.mode}</span>
                     <p className="gallery-date">{item.createdAt}</p>
                     <div className="gallery-actions">
                       <button onClick={() => handleDownload(item.imageData, item.id)}>

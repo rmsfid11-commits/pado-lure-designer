@@ -59,6 +59,57 @@
   margin: 0 auto;
 }
 
+/* 모드 선택 */
+.mode-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.mode-btn {
+  padding: 12px 8px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.mode-btn.active {
+  border-color: #4fc3f7;
+  background: rgba(79, 195, 247, 0.1);
+}
+
+.mode-label {
+  display: block;
+  color: #e0e0e0;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.mode-desc {
+  display: block;
+  color: #888;
+  font-size: 11px;
+}
+
+.mode-btn.active .mode-label {
+  color: #4fc3f7;
+}
+
+.gallery-mode {
+  display: inline-block;
+  font-size: 11px;
+  color: #4fc3f7;
+  background: rgba(79, 195, 247, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
 /* 입력 그룹 */
 .input-group {
   margin-bottom: 20px;
