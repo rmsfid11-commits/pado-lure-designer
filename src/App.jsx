@@ -97,8 +97,8 @@ function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1>파도점 루어 디자이너</h1>
-        <p>AI로 나만의 루어 디자인을 만들어보세요</p>
+        <h1>송근량 전용 디자인 웹</h1>
+        <p>AI로 나만의 디자인을 만들어보세요</p>
       </header>
 
       <nav className="tabs">
