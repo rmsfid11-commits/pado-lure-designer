@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { generateFromText, generateFromImage } from './api/gemini';
 import './App.css';
 
@@ -13,13 +13,24 @@ function App() {
   const [prompt, setPrompt] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
-  const [gallery, setGallery] = useState([]);
+  const [gallery, setGallery] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('pado-gallery') || '[]');
+    } catch { return []; }
+  });
   const [previewImage, setPreviewImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [activeTab, setActiveTab] = useState('lure');
   const [viewImage, setViewImage] = useState(null);
   const [mode, setMode] = useState('rendering');
   const fileInputRef = useRef(null);
+
+  // 갤러리 변경 시 localStorage에 저장
+  useEffect(() => {
+    try {
+      localStorage.setItem('pado-gallery', JSON.stringify(gallery));
+    } catch { /* 용량 초과 시 무시 */ }
+  }, [gallery]);
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
