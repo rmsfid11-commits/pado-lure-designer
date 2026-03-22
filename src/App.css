@@ -65,6 +65,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin-bottom: 20px;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .mode-btn {
@@ -298,6 +300,95 @@
   background: #222;
   color: #e0e0e0;
   border: 1px solid #333;
+}
+
+.btn-regen {
+  background: #1a3a1a !important;
+  color: #4caf50 !important;
+  border: 1px solid #2e5a2e !important;
+}
+
+/* 프리셋 버튼 */
+.preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.preset-btn {
+  padding: 8px 14px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 20px;
+  color: #ccc;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preset-btn.active {
+  background: rgba(79, 195, 247, 0.15);
+  border-color: #4fc3f7;
+  color: #4fc3f7;
+}
+
+/* 색상 팔레트 */
+.color-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.color-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.color-btn.active {
+  border-color: #4fc3f7;
+  transform: scale(1.15);
+}
+
+.color-selected {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #4fc3f7;
+}
+
+/* 크기 슬라이더 */
+.size-slider {
+  width: 100%;
+  accent-color: #4fc3f7;
+  height: 6px;
+}
+
+.size-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #555;
+  margin-top: 4px;
+}
+
+/* 프롬프트 미리보기 */
+.prompt-preview {
+  background: #1a1a2a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.prompt-preview span {
+  color: #4fc3f7;
+  font-weight: 600;
 }
 
 /* 갤러리 */

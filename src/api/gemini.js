@@ -67,6 +67,71 @@ Lure description: ${desc}
 
 Important: Must show exactly 2 views of the same lure in one image. No text overlays.`,
 
+  underwater: (desc) => `You are an underwater fishing photography specialist.
+Create a stunning underwater action shot of a fishing lure swimming through crystal clear water.
+- The lure is mid-retrieve, showing realistic swimming action and movement
+- Crystal clear blue/turquoise water with visible light rays penetrating from the surface above
+- Tiny air bubbles trailing behind the lure
+- The lure's lip is digging into the water creating a realistic diving action
+- Motion blur on the water, but the lure is sharp
+- You can see the fishing line extending upward toward the surface
+- Dramatic underwater lighting
+- Photorealistic quality, like a GoPro underwater shot
+
+Lure description: ${desc}
+
+Important: Generate an exciting underwater action scene. Make it look like a real underwater photo.`,
+
+  package: (desc) => `You are a fishing lure packaging designer.
+Create a photorealistic image of a fishing lure in retail blister packaging.
+- Clear plastic blister pack showing the lure inside
+- Printed cardboard backing with:
+  - Brand name "PADO" at the top in bold
+  - Lure specifications (size, weight, diving depth)
+  - A small underwater action photo in the corner
+  - Barcode at the bottom
+- Professional retail packaging design
+- The lure is clearly visible through the clear plastic
+- Hanging hole at the top of the card
+- Premium quality packaging design
+
+Lure description: ${desc}
+
+Important: Must look like a real commercial fishing lure package you'd find in a tackle shop.`,
+
+  colorVariants: (desc) => `You are a fishing lure color designer creating a color variation chart.
+Create a single image showing the SAME fishing lure in exactly 4 different color variations arranged in a 2x2 grid.
+- TOP LEFT: Original/natural colors
+- TOP RIGHT: Bright/flashy variation (chartreuse, hot pink, etc.)
+- BOTTOM LEFT: Dark/subtle variation (black, dark green, etc.)
+- BOTTOM RIGHT: Metallic/holographic variation (chrome, gold, etc.)
+
+Requirements:
+- All 4 lures have the EXACT same shape and design, only colors differ
+- Clean white background for each cell
+- Subtle grid lines or gaps separating the 4 variants
+- Small color name label under each lure
+- Professional product catalog layout
+
+Lure description: ${desc}
+
+Important: Show exactly 4 color variations of the same lure design in one image.`,
+
+  logo: (desc) => `You are a macro product photographer specializing in fishing lure branding.
+Create an extreme close-up macro photo of a fishing lure body showing engraved/printed brand details.
+- Ultra close-up shot of the lure body surface
+- "PADO" brand name laser-engraved or printed on the lure body
+- Show the texture of the paint finish in extreme detail
+- Visible holographic patterns, scales texture, or paint layers
+- Shallow depth of field (bokeh background)
+- Professional macro photography lighting
+- You can see individual paint layers, clear coat reflection
+- Premium quality feel
+
+Lure description: ${desc}
+
+Important: Focus on the brand engraving and surface detail. Extreme close-up macro shot.`,
+
   free: (desc) => `${desc}
 
 Important: Generate a high-quality image based on the description above.`,
