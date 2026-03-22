@@ -140,9 +140,17 @@ ${desc}
 
 Important: Focus on brand engraving and surface detail. You MUST incorporate ALL lure design details mentioned above.`,
 
-  free: (desc) => `${desc}
+  free: (desc) => `You are a world-class photorealistic image generator. The user will describe what they want in any language (including Korean). You MUST understand their intent perfectly and generate exactly what they describe.
 
-Important: Generate a high-quality image based on the description above.`,
+USER'S REQUEST (follow this EXACTLY):
+${desc}
+
+Rules:
+- Generate an ultra-high-quality, photorealistic image
+- Pay attention to EVERY detail the user mentions
+- If the user describes action/movement, make it dramatic and dynamic with motion blur, splashes, speed lines
+- If the user describes a scene, make it cinematic and immersive
+- No text overlays or watermarks`,
 };
 
 // 텍스트로 이미지 생성
