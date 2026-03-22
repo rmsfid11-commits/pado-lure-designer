@@ -1,0 +1,348 @@
+/* 기본 리셋 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #e0e0e0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* 헤더 */
+.header {
+  text-align: center;
+  padding: 40px 20px 20px;
+  border-bottom: 1px solid #222;
+}
+
+.header h1 {
+  font-size: 28px;
+  color: #4fc3f7;
+  margin-bottom: 8px;
+}
+
+.header p {
+  color: #888;
+  font-size: 14px;
+}
+
+/* 탭 */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #222;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 14px;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tabs button.active {
+  color: #4fc3f7;
+  border-bottom: 2px solid #4fc3f7;
+}
+
+/* 메인 */
+.main {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 입력 그룹 */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.input-group textarea {
+  width: 100%;
+  padding: 14px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  color: #e0e0e0;
+  font-size: 15px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.input-group textarea:focus {
+  outline: none;
+  border-color: #4fc3f7;
+}
+
+/* 업로드 영역 */
+.upload-area {
+  border: 2px dashed #333;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.upload-area:hover {
+  border-color: #4fc3f7;
+}
+
+.upload-placeholder .upload-icon {
+  font-size: 36px;
+  color: #555;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.upload-placeholder p {
+  color: #888;
+  font-size: 14px;
+}
+
+.upload-placeholder .sub {
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.preview-img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+}
+
+/* 버튼 */
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-generate {
+  flex: 1;
+  padding: 14px;
+  background: linear-gradient(135deg, #4fc3f7, #0288d1);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-generate:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.btn-generate:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-clear {
+  padding: 14px 20px;
+  background: #222;
+  color: #aaa;
+  border: 1px solid #333;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* 로딩 */
+.loading {
+  text-align: center;
+  padding: 40px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #333;
+  border-top-color: #4fc3f7;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading p {
+  color: #888;
+  font-size: 14px;
+}
+
+/* 결과 */
+.result-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #222;
+}
+
+.result-section h2 {
+  font-size: 18px;
+  color: #4fc3f7;
+  margin-bottom: 16px;
+}
+
+.result-image-wrap {
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.result-image {
+  width: 100%;
+  display: block;
+  cursor: pointer;
+}
+
+.result-text {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.result-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.result-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+}
+
+.result-actions button:first-child {
+  background: #4fc3f7;
+  color: #000;
+}
+
+.result-actions button:last-child {
+  background: #222;
+  color: #e0e0e0;
+  border: 1px solid #333;
+}
+
+/* 갤러리 */
+.gallery {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty p {
+  color: #888;
+  font-size: 16px;
+}
+
+.empty .sub {
+  color: #555;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.gallery-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gallery-item {
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #222;
+}
+
+.gallery-item > img {
+  width: 100%;
+  display: block;
+  cursor: pointer;
+}
+
+.gallery-info {
+  padding: 12px;
+}
+
+.gallery-prompt {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 4px;
+}
+
+.gallery-date {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.gallery-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.gallery-actions button {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  background: #222;
+  color: #ccc;
+}
+
+.gallery-actions .btn-delete {
+  background: #2a1515;
+  color: #f44;
+}
+
+/* 모달 */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.modal img {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 8px;
+}
