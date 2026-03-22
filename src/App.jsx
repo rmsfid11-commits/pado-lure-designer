@@ -104,13 +104,13 @@ function App() {
       <nav className="tabs">
         <button
           className={isLureTab ? 'active' : ''}
-          onClick={() => { setActiveTab('lure'); handleClear(); }}
+          onClick={() => setActiveTab('lure')}
         >
           루어 디자인
         </button>
         <button
           className={isFreeTab ? 'active' : ''}
-          onClick={() => { setActiveTab('free'); handleClear(); }}
+          onClick={() => setActiveTab('free')}
         >
           자유 생성
         </button>
