@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { generateFromText, generateFromImage } from './api/gemini';
+import { generateFromText, generateFromImage, generateGifFrames } from './api/gemini';
 import './App.css';
 
 const LURE_MODES = [
@@ -11,6 +11,7 @@ const LURE_MODES = [
   { id: 'package', label: '패키지', desc: '블리스터 포장' },
   { id: 'colorVariants', label: '컬러 변형', desc: '색상 4종 비교' },
   { id: 'logo', label: '로고 각인', desc: '브랜드 클로즈업' },
+  { id: 'gif', label: 'GIF 애니', desc: '수중 액션 움짤' },
 ];
 
 const LURE_TYPES = [
@@ -54,13 +55,27 @@ function App() {
   const [selectedType, setSelectedType] = useState('');
   const [selectedColors, setSelectedColors] = useState([]);
   const [lureSize, setLureSize] = useState(7);
+  const [gifFrames, setGifFrames] = useState([]);
+  const [gifIndex, setGifIndex] = useState(0);
+  const [gifProgress, setGifProgress] = useState('');
   const fileInputRef = useRef(null);
+  const gifTimerRef = useRef(null);
 
   useEffect(() => {
     try {
       localStorage.setItem('pado-gallery', JSON.stringify(gallery));
     } catch { /* 용량 초과 시 무시 */ }
   }, [gallery]);
+
+  // GIF 애니메이션 타이머
+  useEffect(() => {
+    if (gifFrames.length > 1) {
+      gifTimerRef.current = setInterval(() => {
+        setGifIndex((prev) => (prev + 1) % gifFrames.length);
+      }, 300);
+      return () => clearInterval(gifTimerRef.current);
+    }
+  }, [gifFrames]);
 
   // 프리셋 선택 시 프롬프트 자동 조합
   const buildPrompt = () => {
@@ -100,21 +115,42 @@ function App() {
     if (!finalPrompt.trim() && !imageFile) return;
     setLoading(true);
     setResult(null);
+    setGifFrames([]);
+    setGifProgress('');
     const currentMode = activeTab === 'free' ? 'free' : mode;
+
     try {
-      let res;
-      if (imageFile) {
-        const base64 = await fileToBase64(imageFile);
-        res = await generateFromImage(base64, imageFile.type, finalPrompt, currentMode);
+      if (currentMode === 'gif') {
+        // GIF 모드: 프레임 5장 생성
+        const frameCount = 5;
+        const frames = [];
+        for (let i = 0; i < frameCount; i++) {
+          setGifProgress(`프레임 생성 중... (${i + 1}/${frameCount})`);
+          const res = await generateFromText(
+            `Frame ${i + 1}/${frameCount} of underwater swimming animation. ${finalPrompt}`,
+            'underwater'
+          );
+          if (res.imageData) frames.push(res.imageData);
+        }
+        setGifFrames(frames);
+        setGifIndex(0);
+        setResult({ imageData: frames[0], text: `${frames.length}프레임 GIF 생성 완료!` });
       } else {
-        res = await generateFromText(finalPrompt, currentMode);
+        let res;
+        if (imageFile) {
+          const base64 = await fileToBase64(imageFile);
+          res = await generateFromImage(base64, imageFile.type, finalPrompt, currentMode);
+        } else {
+          res = await generateFromText(finalPrompt, currentMode);
+        }
+        setResult(res);
       }
-      setResult(res);
     } catch (err) {
       console.error(err);
       alert('생성 실패: ' + err.message);
     } finally {
       setLoading(false);
+      setGifProgress('');
     }
   };
 
@@ -326,11 +362,41 @@ function App() {
           {loading && (
             <div className="loading">
               <div className="spinner"></div>
-              <p>{isLureTab ? 'AI가 루어를 디자인하고 있어요...' : 'AI가 이미지를 생성하고 있어요...'}</p>
+              <p>{gifProgress || (isLureTab ? 'AI가 루어를 디자인하고 있어요...' : 'AI가 이미지를 생성하고 있어요...')}</p>
             </div>
           )}
 
-          {result?.imageData && (
+          {/* GIF 결과 */}
+          {gifFrames.length > 1 && (
+            <div className="result-section">
+              <h2>GIF 결과 ({gifFrames.length}프레임)</h2>
+              <div className="result-image-wrap gif-player">
+                <img
+                  src={gifFrames[gifIndex]}
+                  alt={`프레임 ${gifIndex + 1}`}
+                  className="result-image"
+                  onClick={() => setViewImage(gifFrames[gifIndex])}
+                />
+                <div className="gif-indicator">
+                  {gifFrames.map((_, i) => (
+                    <span key={i} className={`gif-dot ${i === gifIndex ? 'active' : ''}`} />
+                  ))}
+                </div>
+              </div>
+              <div className="result-actions">
+                <button onClick={() => {
+                  gifFrames.forEach((frame, i) => handleDownload(frame, `gif-frame-${i + 1}`));
+                }}>전체 프레임 저장</button>
+                <button onClick={handleSave}>갤러리에 저장</button>
+                <button className="btn-regen" onClick={handleRegenerate} disabled={loading}>
+                  재생성
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* 일반 결과 */}
+          {result?.imageData && gifFrames.length <= 1 && (
             <div className="result-section">
               <h2>생성 결과</h2>
               <div className="result-image-wrap">

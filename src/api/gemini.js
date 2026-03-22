@@ -179,6 +179,77 @@ export async function generateFromImage(imageBase64, mimeType, prompt, mode = 'r
   return extractImageFromResponse(result.response);
 }
 
+// GIF용 프레임 여러 장 생성
+export async function generateGifFrames(prompt, frameCount = 5) {
+  const model = genAI.getGenerativeModel({
+    model: 'gemini-2.5-flash-image',
+    generationConfig: {
+      responseModalities: ['TEXT', 'IMAGE'],
+    },
+  });
+
+  const frames = [];
+  for (let i = 0; i < frameCount; i++) {
+    const phase = i / (frameCount - 1); // 0 ~ 1
+    const angle = Math.round(phase * 360);
+    const framePrompt = `You are creating frame ${i + 1} of ${frameCount} for an underwater animation sequence of a fishing lure.
+
+The fishing lure is swimming underwater, moving from left to right in a wobbling motion.
+- Crystal clear blue/turquoise water with light rays from above
+- Tiny bubbles trailing behind the lure
+- The lure's body is rotated approximately ${angle} degrees in its wobble cycle
+- Frame ${i + 1}/${frameCount}: The lure is at position ${Math.round(phase * 100)}% of its swimming path
+- ${i % 2 === 0 ? 'The lure tilts slightly upward' : 'The lure tilts slightly downward'} in this frame
+- Consistent underwater environment across all frames
+- Photorealistic quality
+
+Lure description: ${prompt}
+
+CRITICAL: This is frame ${i + 1} of a ${frameCount}-frame animation. Keep the lure design, water color, and lighting EXACTLY consistent. Only the lure's position and wobble angle should change slightly.`;
+
+    const result = await model.generateContent(framePrompt);
+    const extracted = extractImageFromResponse(result.response);
+    if (extracted.imageData) {
+      frames.push(extracted.imageData);
+    }
+  }
+
+  return frames;
+}
+
+// base64 이미지들을 GIF로 합치기
+export function createGifFromFrames(frames, delay = 200) {
+  return new Promise((resolve) => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // GIF 인코딩을 위해 프레임들을 순서대로 처리
+    const images = [];
+    let loaded = 0;
+
+    frames.forEach((src, idx) => {
+      const img = new Image();
+      img.onload = () => {
+        images[idx] = img;
+        loaded++;
+        if (loaded === frames.length) {
+          // 첫 번째 프레임 크기 기준
+          canvas.width = images[0].width;
+          canvas.height = images[0].height;
+
+          // GIF 대신 앞뒤로 반복하는 애니메이션 이미지 시퀀스 반환
+          resolve({
+            frames: frames,
+            width: canvas.width,
+            height: canvas.height,
+          });
+        }
+      };
+      img.src = src;
+    });
+  });
+}
+
 // 응답에서 이미지 추출
 function extractImageFromResponse(response) {
   const parts = response.candidates?.[0]?.content?.parts || [];

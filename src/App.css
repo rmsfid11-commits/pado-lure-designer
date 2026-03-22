@@ -391,6 +391,32 @@
   font-weight: 600;
 }
 
+/* GIF 플레이어 */
+.gif-player {
+  position: relative;
+}
+
+.gif-indicator {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.gif-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: background 0.2s;
+}
+
+.gif-dot.active {
+  background: #4fc3f7;
+}
+
 /* 갤러리 */
 .gallery {
   padding: 20px;
