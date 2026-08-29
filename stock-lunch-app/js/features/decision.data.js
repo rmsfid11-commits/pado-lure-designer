@@ -155,6 +155,15 @@ const RAW_DECISION_MENUS = [
   { menu: "콤보플레이트", emoji: "🍱", solo: true, group: true, price: 13000, cuisine: "아시안" },
   { menu: "새우볶음쌀국수", emoji: "🍜", solo: true, group: true, price: 11000, cuisine: "아시안" },
   { menu: "태국식볶음면", emoji: "🍝", solo: true, group: true, price: 10000, cuisine: "아시안" },
+
+  // "예산 상관없어"를 눌러도 1만원대 초반과 별 차이가 안 느껴지던 문제 보강 — 진짜 고급 라인
+  { menu: "한우 안심스테이크 정식", emoji: "🥩", solo: true, group: true, price: 28000, cuisine: "한식" },
+  { menu: "궁중 한정식 코스", emoji: "🍱", solo: true, group: true, price: 26000, cuisine: "한식" },
+  { menu: "특선 장어덮밥", emoji: "🐟", solo: true, group: true, price: 24000, cuisine: "일식" },
+  { menu: "특선 회정식", emoji: "🍣", solo: true, group: true, price: 26000, cuisine: "일식" },
+  { menu: "안심스테이크 코스", emoji: "🥩", solo: true, group: true, price: 30000, cuisine: "양식" },
+  { menu: "프리미엄 딤섬 코스", emoji: "🥟", solo: true, group: true, price: 24000, cuisine: "중식" },
+  { menu: "타이 세트메뉴", emoji: "🍛", solo: true, group: true, price: 22000, cuisine: "아시안" },
 ];
 
 // 5천원 이하 -> 1, 1만원 이하 -> 2, 그 이상 -> 3 (priceGroup 필터 pill 라벨과 맞춤)
