@@ -5,10 +5,16 @@ const won = (v) => `${v.toLocaleString("ko-KR")}원`;
 
 export function initBudget() {
   const root = document.getElementById("panel-budget");
-  const calcBtn = root.querySelector("[data-role='calcBtn']");
-  const resultBox = root.querySelector("[data-role='result']");
   const resultAmount = root.querySelector("[data-role='resultAmount']");
   const resultComment = root.querySelector("[data-role='resultComment']");
+
+  let ready = false;
+  function recalc() {
+    if (!ready) return;
+    const todayBudget = Math.round(budgetField.get() / daysField.get() / 500) * 500;
+    resultAmount.textContent = won(todayBudget);
+    resultComment.textContent = getBudgetComment(todayBudget);
+  }
 
   const daysField = createNumberField({
     valueEl: root.querySelector("[data-role='daysValue']"),
@@ -20,6 +26,7 @@ export function initBudget() {
     step: 1,
     initial: 10,
     format: (v) => `${v}`,
+    onChange: recalc,
   });
 
   const budgetField = createNumberField({
@@ -31,17 +38,11 @@ export function initBudget() {
     max: 2000000,
     step: 10000,
     initial: 200000,
-    pixelsPerStep: 10,
+    pixelsPerStep: 25,
     format: (v) => v.toLocaleString("ko-KR"),
+    onChange: recalc,
   });
 
-  calcBtn.addEventListener("click", () => {
-    const days = daysField.get();
-    const remaining = budgetField.get();
-    const todayBudget = Math.round(remaining / days / 100) * 100;
-
-    resultAmount.textContent = won(todayBudget);
-    resultComment.textContent = getBudgetComment(todayBudget);
-    resultBox.classList.remove("hidden");
-  });
+  ready = true;
+  recalc();
 }

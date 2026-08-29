@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="topbar">🍚 직장인 점심 도우미</header>
+
   <main class="app">
     <!-- 1. 주식쟁이 점심룰렛 -->
     <section id="panel-roulette" class="panel" data-panel="roulette">
@@ -56,9 +58,7 @@
           </div>
         </div>
 
-        <button data-role="calcBtn" class="btn-primary">오늘 예산 계산하기</button>
-
-        <div data-role="result" class="inline-result hidden">
+        <div data-role="result" class="inline-result">
           <p class="inline-result-amount" data-role="resultAmount"></p>
           <p class="inline-result-comment" data-role="resultComment"></p>
         </div>
@@ -134,10 +134,9 @@
           </div>
         </div>
 
-        <button data-role="calcBtn" class="btn-primary">몇 주 살 수 있는지 계산</button>
-
-        <div data-role="result" class="inline-result hidden">
+        <div data-role="result" class="inline-result">
           <p class="inline-result-comment" data-role="resultMessage"></p>
+          <p class="inline-result-note">한 달 22일 근무 기준으로 계산해요</p>
         </div>
       </section>
     </section>

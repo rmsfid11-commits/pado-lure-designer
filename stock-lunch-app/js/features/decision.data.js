@@ -23,7 +23,7 @@ const DECISION_COMMENTS = [
   "오늘은 이거다.",
 ];
 
-function filterMenus({ solo, timeMinutes, priceTier }) {
+export function filterMenus({ solo, timeMinutes, priceTier }) {
   const strict = DECISION_MENUS.filter(
     (m) => (solo ? m.solo : m.group) && m.maxTime <= timeMinutes && m.priceTier <= priceTier
   );
@@ -35,8 +35,7 @@ function filterMenus({ solo, timeMinutes, priceTier }) {
   return withoutSoloFilter.length > 0 ? withoutSoloFilter : DECISION_MENUS;
 }
 
-export function pickDecision(conditions) {
-  const pool = filterMenus(conditions);
+export function pickFromPool(pool) {
   const item = pool[Math.floor(Math.random() * pool.length)];
   const comment = DECISION_COMMENTS[Math.floor(Math.random() * DECISION_COMMENTS.length)];
   return { ...item, comment };
