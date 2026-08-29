@@ -152,9 +152,14 @@ export function pickAfterLunch(tone) {
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
-export function pickLunch(rate) {
+// "다시 뽑기"를 눌러도 직전과 같은 메뉴가 바로 다시 나오지 않게 제외한다.
+export function pickLunch(rate, excludeMenu) {
   const bracket = getBracket(rate);
-  const option = bracket.options[Math.floor(Math.random() * bracket.options.length)];
+  const candidates =
+    excludeMenu && bracket.options.length > 1
+      ? bracket.options.filter((o) => o.menu !== excludeMenu)
+      : bracket.options;
+  const option = candidates[Math.floor(Math.random() * candidates.length)];
   return { ...option, label: bracket.label, emoji: bracket.emoji, tone: bracket.tone };
 }
 

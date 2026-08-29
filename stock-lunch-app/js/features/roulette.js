@@ -7,6 +7,7 @@ const formatPrice = (price) => (price > 0 ? `약 ${price.toLocaleString("ko-KR")
 export function initRoulette() {
   const root = document.getElementById("panel-roulette");
   const drawBtn = root.querySelector("[data-role='drawBtn']");
+  let lastPickedMenu = null;
 
   const rateField = createNumberField({
     valueEl: root.querySelector("[data-role='rateValue']"),
@@ -24,7 +25,8 @@ export function initRoulette() {
     showReveal({
       shuffleNames: ALL_MENU_NAMES,
       pick: () => {
-        const result = pickLunch(rate);
+        const result = pickLunch(rate, lastPickedMenu);
+        lastPickedMenu = result.menu;
         const sign = rate > 0 ? "+" : "";
         return {
           emoji: result.emoji,
