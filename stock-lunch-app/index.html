@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <title>주식쟁이 점심룰렛</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <p class="eyebrow">직장인 주식러 점심 도우미</p>
+      <h1>주식쟁이 점심룰렛</h1>
+      <p class="subtitle">오늘 계좌 수익률을 입력하면 점심 메뉴를 정해드려요</p>
+    </header>
+
+    <section class="input-card">
+      <label for="returnRate">오늘 계좌 수익률</label>
+      <div class="input-row">
+        <input
+          id="returnRate"
+          type="number"
+          inputmode="decimal"
+          step="0.1"
+          placeholder="예: 2.5 또는 -1.3"
+        />
+        <span class="unit">%</span>
+      </div>
+      <button id="drawBtn" class="btn-primary">오늘 점심 뽑기</button>
+    </section>
+
+    <section id="resultCard" class="result-card hidden">
+      <p class="result-range" id="resultRange"></p>
+      <p class="result-emoji" id="resultEmoji"></p>
+      <h2 class="result-menu" id="resultMenu"></h2>
+      <p class="result-comment" id="resultComment"></p>
+      <button id="reDrawBtn" class="btn-secondary">다시 뽑기</button>
+    </section>
+
+    <p id="errorMsg" class="error-msg hidden">수익률을 숫자로 입력해주세요.</p>
+  </main>
+
+  <script src="menuData.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
