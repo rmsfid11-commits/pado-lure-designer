@@ -34,6 +34,10 @@ export const LUNCH_TABLE = [
       { menu: "돼지갈비", price: 17000, comment: "삼겹살 말고 오늘은 갈비 정돈 괜찮지." },
       { menu: "갈비탕", price: 11000, comment: "뜨끈하고 든든하게." },
       { menu: "냉면", price: 9000, comment: "이 정도 수익엔 시원하게 한 그릇." },
+      { menu: "콩국수", price: 9000, comment: "여름엔 이게 국룰이지, 오늘 같은 날엔 더." },
+      { menu: "쌀국수", price: 10000, comment: "이국적인 기분으로 가볍게 플렉스." },
+      { menu: "라멘", price: 11000, comment: "진한 국물로 든든하게, 오늘 정돈 괜찮지." },
+      { menu: "쭈꾸미볶음", price: 11000, comment: "매콤하게 스트레스도 함께 볶아버리기." },
     ],
   },
   {
@@ -51,6 +55,10 @@ export const LUNCH_TABLE = [
       { menu: "된장찌개", price: 8000, comment: "이것도 저것도 아닌 무난함." },
       { menu: "짜장면", price: 7000, comment: "고민될 땐 짜장면이 국룰." },
       { menu: "김치찜", price: 12000, comment: "속은 얼큰하게, 마음은 무난하게." },
+      { menu: "순대국밥", price: 9000, comment: "이것도 국밥, 저것도 국밥, 오늘은 순대국밥." },
+      { menu: "육개장", price: 9000, comment: "얼큰하고 든든한, 무난의 정석." },
+      { menu: "칼국수", price: 8000, comment: "쫄깃한 면발로 하루를 버텨봅니다." },
+      { menu: "청국장", price: 8000, comment: "호불호는 있지만 몸엔 좋은 선택." },
     ],
   },
   {
