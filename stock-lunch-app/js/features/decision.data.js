@@ -23,16 +23,27 @@ const DECISION_COMMENTS = [
   "오늘은 이거다.",
 ];
 
-export function filterMenus({ solo, timeMinutes, priceTier }) {
-  const strict = DECISION_MENUS.filter(
-    (m) => (solo ? m.solo : m.group) && m.maxTime <= timeMinutes && m.priceTier <= priceTier
-  );
-  if (strict.length > 0) return strict;
+// "다시 뽑기"를 눌러도 항상 같은 메뉴만 나오는 걸 막기 위한 최소 후보 수.
+// 조건을 다 지키는 후보가 이보다 적으면 덜 중요한 조건부터 하나씩 완화한다.
+const MIN_POOL_SIZE = 3;
 
-  const withoutSoloFilter = DECISION_MENUS.filter(
-    (m) => m.maxTime <= timeMinutes && m.priceTier <= priceTier
-  );
-  return withoutSoloFilter.length > 0 ? withoutSoloFilter : DECISION_MENUS;
+export function filterMenus({ solo, timeMinutes, priceTier }) {
+  const matchesGroup = (m) => (solo ? m.solo : m.group);
+  const matchesTime = (m) => m.maxTime <= timeMinutes;
+  const matchesPrice = (m) => m.priceTier <= priceTier;
+
+  const relaxationSteps = [
+    (m) => matchesGroup(m) && matchesTime(m) && matchesPrice(m), // 다 지키기
+    (m) => matchesTime(m) && matchesPrice(m), // 혼밥/같이 완화
+    (m) => matchesPrice(m), // 시간도 완화
+    () => true, // 예산도 완화 (전체 메뉴)
+  ];
+
+  for (const test of relaxationSteps) {
+    const pool = DECISION_MENUS.filter(test);
+    if (pool.length >= MIN_POOL_SIZE) return pool;
+  }
+  return DECISION_MENUS;
 }
 
 export function pickFromPool(pool) {
