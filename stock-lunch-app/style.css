@@ -217,6 +217,14 @@ body {
   margin-bottom: 8px;
 }
 
+.pill-group--wrap {
+  flex-wrap: wrap;
+}
+
+.pill-group--wrap .pill {
+  flex: 1 1 calc(33.333% - 6px);
+}
+
 .pill {
   flex: 1;
   border: 1.5px solid var(--border);

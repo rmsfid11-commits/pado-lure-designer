@@ -18,12 +18,14 @@ export function initDecision() {
   const decideBtn = root.querySelector("[data-role='decideBtn']");
 
   const getSolo = bindPillGroup(root.querySelector("[data-role='soloGroup']"));
+  const getCuisine = bindPillGroup(root.querySelector("[data-role='cuisineGroup']"));
   const getTime = bindPillGroup(root.querySelector("[data-role='timeGroup']"));
   const getPrice = bindPillGroup(root.querySelector("[data-role='priceGroup']"));
 
   decideBtn.addEventListener("click", () => {
     const conditions = {
       solo: getSolo() === "solo",
+      cuisine: getCuisine(),
       timeMinutes: Number(getTime()),
       priceTier: Number(getPrice()),
     };
