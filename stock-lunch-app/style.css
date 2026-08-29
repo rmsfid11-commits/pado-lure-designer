@@ -28,11 +28,12 @@ body {
   width: 100%;
   max-width: 420px;
   min-height: 100vh;
-  padding: 64px 20px 40px;
+  padding: 40px 20px;
   background: var(--bg);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
@@ -53,16 +54,15 @@ body {
   width: 100%;
   background: var(--card-bg);
   border-radius: 20px;
-  padding: 24px 20px;
+  padding: 32px 28px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
 .stepper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 18px;
+  justify-content: space-between;
+  margin-bottom: 22px;
 }
 
 .spin-buttons {
