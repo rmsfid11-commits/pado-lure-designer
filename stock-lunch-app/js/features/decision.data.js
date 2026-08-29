@@ -11,6 +11,14 @@ const RAW_DECISION_MENUS = [
   { menu: "오니기리", emoji: "🍙", solo: true, group: false, maxTime: 5, price: 4000, cuisine: "일식" },
   { menu: "베이글", emoji: "🥯", solo: true, group: false, maxTime: 5, price: 4000, cuisine: "양식" },
   { menu: "스프링롤", emoji: "🥢", solo: true, group: true, maxTime: 10, price: 4500, cuisine: "아시안" },
+
+  // maxTime<=10인 메뉴가 전부 1만원 이하라 "1만원 이하"와 "예산 상관없어"가 똑같이 나오던 문제 보강
+  { menu: "연어포케", emoji: "🥙", solo: true, group: false, maxTime: 10, price: 13000, cuisine: "아시안" },
+  { menu: "프리미엄 초밥세트", emoji: "🍣", solo: true, group: false, maxTime: 10, price: 15000, cuisine: "일식" },
+  { menu: "닭가슴살 샐러드보울", emoji: "🥗", solo: true, group: false, maxTime: 10, price: 12000, cuisine: "양식" },
+  { menu: "스테이크말이 김밥", emoji: "🌯", solo: true, group: false, maxTime: 10, price: 11000, cuisine: "한식" },
+  { menu: "마라탕 포장(곱빼기)", emoji: "🌶️", solo: true, group: false, maxTime: 10, price: 12000, cuisine: "중식" },
+  { menu: "프리미엄 정식 도시락", emoji: "🍱", solo: true, group: false, maxTime: 10, price: 14000, cuisine: "한식" },
   { menu: "구내식당", emoji: "🍚", solo: true, group: true, maxTime: 15, price: 6000, cuisine: "한식" },
   { menu: "라면", emoji: "🍜", solo: true, group: true, maxTime: 15, price: 5000, cuisine: "한식" },
   { menu: "국밥", emoji: "🍲", solo: true, group: true, maxTime: 20, price: 9000, cuisine: "한식" },
