@@ -16,6 +16,7 @@ function bindPillGroup(groupEl) {
 export function initDecision() {
   const root = document.getElementById("panel-decision");
   const decideBtn = root.querySelector("[data-role='decideBtn']");
+  let lastPickedMenu = null;
 
   const getSolo = bindPillGroup(root.querySelector("[data-role='soloGroup']"));
   const getCuisine = bindPillGroup(root.querySelector("[data-role='cuisineGroup']"));
@@ -34,7 +35,8 @@ export function initDecision() {
     showReveal({
       shuffleNames: pool.map((m) => m.menu),
       pick: () => {
-        const result = pickFromPool(pool);
+        const result = pickFromPool(pool, lastPickedMenu);
+        lastPickedMenu = result.menu;
         return {
           emoji: result.emoji,
           line1: "30초 결정 완료,",

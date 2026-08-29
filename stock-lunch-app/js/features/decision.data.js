@@ -200,8 +200,12 @@ export function filterMenus({ solo, cuisine, timeMinutes, priceTier }) {
   return DECISION_MENUS;
 }
 
-export function pickFromPool(pool) {
-  const item = pool[Math.floor(Math.random() * pool.length)];
+// 풀이 작을 때 "방금 그거 또 나옴"이 너무 자주 체감돼서, 직전에 뽑힌 메뉴는
+// (풀에 다른 선택지가 있는 한) 바로 다음 뽑기에서 제외한다.
+export function pickFromPool(pool, excludeMenu) {
+  const candidates =
+    excludeMenu && pool.length > 1 ? pool.filter((m) => m.menu !== excludeMenu) : pool;
+  const item = candidates[Math.floor(Math.random() * candidates.length)];
   const comment = DECISION_COMMENTS[Math.floor(Math.random() * DECISION_COMMENTS.length)];
   return { ...item, comment };
 }
