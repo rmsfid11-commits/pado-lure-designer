@@ -5,7 +5,8 @@ export const BUDGET_TABLE = [
   { minInclusive: 13000, comment: "웬만한 메뉴는 다 가능해요." },
   { minInclusive: 9000, comment: "국밥 각이네요." },
   { minInclusive: 6000, comment: "적당히 아껴 먹을 때예요." },
-  { minInclusive: -Infinity, comment: "오늘은 편의점이 답입니다." },
+  { minInclusive: 1, comment: "오늘은 편의점이 답입니다." },
+  { minInclusive: -Infinity, comment: "오늘은 산소만 마셔야겠어요." },
 ];
 
 export function getBudgetComment(amount) {

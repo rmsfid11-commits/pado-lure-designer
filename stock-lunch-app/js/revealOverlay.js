@@ -3,12 +3,14 @@
 
 const SHUFFLE_DURATION = 500;
 const SHUFFLE_TICK = 55;
+const AFTER_REVEAL_DELAY = 900;
 const CONFETTI_COLORS = ["#3182f6", "#f04452", "#ffb84d", "#4caf82", "#8b5cf6"];
 const TONES = ["tone-gain", "tone-neutral", "tone-loss"];
 
-let overlay, resultCard, confettiLayer, resultEmoji, resultLine1, resultLine2, resultComment, redrawBtn, closeBtn;
+let overlay, resultCard, confettiLayer, resultEmoji, resultLine1, resultLine2, resultComment, resultAfter, redrawBtn, closeBtn;
 let currentOnRedraw = null;
 let currentShuffleNames = [];
+let afterRevealTimer = null;
 
 function spawnConfetti() {
   confettiLayer.innerHTML = "";
@@ -35,7 +37,7 @@ function applyTone(tone) {
   if (tone) resultCard.classList.add(`tone-${tone}`);
 }
 
-function renderFinal({ emoji, line1, line2, comment, tone }) {
+function renderFinal({ emoji, line1, line2, comment, tone, after }) {
   resultEmoji.textContent = emoji ?? "";
   resultLine1.textContent = line1 ?? "";
   resultLine2.textContent = line2 ?? "";
@@ -48,11 +50,24 @@ function renderFinal({ emoji, line1, line2, comment, tone }) {
   spawnConfetti();
 
   if (navigator.vibrate) navigator.vibrate(20);
+
+  clearTimeout(afterRevealTimer);
+  resultAfter.classList.add("hidden");
+  resultAfter.classList.remove("shown");
+  resultAfter.textContent = "";
+  if (after) {
+    afterRevealTimer = setTimeout(() => {
+      resultAfter.textContent = `+ ${after.emoji} ${after.name} — ${after.reason}`;
+      resultAfter.classList.remove("hidden");
+      requestAnimationFrame(() => resultAfter.classList.add("shown"));
+    }, AFTER_REVEAL_DELAY);
+  }
 }
 
 /**
  * @param {Object} config
- * @param {() => {emoji, line1, line2, comment, tone}} config.pick - 결과를 뽑는 함수 (다시 뽑기 때 재호출됨)
+ * @param {() => {emoji, line1, line2, comment, tone, after?}} config.pick - 결과를 뽑는 함수 (다시 뽑기 때 재호출됨).
+ *   after는 선택 항목: {emoji, name, reason} 형태로 주면 카드가 착지한 뒤 살짝 늦게 곁들임 추천이 따라붙는다.
  * @param {string[]} [config.shuffleNames] - 슬롯 연출 중 무작위로 보여줄 후보 이름들
  */
 export function showReveal({ pick, shuffleNames = [] }) {
@@ -66,6 +81,9 @@ export function showReveal({ pick, shuffleNames = [] }) {
   resultLine2.textContent = "";
   resultComment.textContent = "";
   resultEmoji.textContent = "🎲";
+  clearTimeout(afterRevealTimer);
+  resultAfter.classList.add("hidden");
+  resultAfter.classList.remove("shown");
 
   const shuffleTimer =
     currentShuffleNames.length > 0
@@ -92,6 +110,7 @@ function closeOverlay() {
   overlay.classList.add("hidden");
   confettiLayer.innerHTML = "";
   currentOnRedraw = null;
+  clearTimeout(afterRevealTimer);
 }
 
 export function initRevealOverlay() {
@@ -102,6 +121,7 @@ export function initRevealOverlay() {
   resultLine1 = document.getElementById("resultLine1");
   resultLine2 = document.getElementById("resultLine2");
   resultComment = document.getElementById("resultComment");
+  resultAfter = document.getElementById("resultAfter");
   redrawBtn = document.getElementById("reDrawBtn");
   closeBtn = document.getElementById("closeOverlayBtn");
 

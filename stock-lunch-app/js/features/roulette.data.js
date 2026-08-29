@@ -73,8 +73,29 @@ export const LUNCH_TABLE = [
   },
 ];
 
+// 점심 뽑고 나서 곁들이는 "애프터 점심" (커피/음료), 수익 톤별로.
+const AFTER_LUNCH = {
+  gain: [
+    { emoji: "☕", name: "아이스 아메리카노", reason: "오늘같은 날엔 시원하게 한 잔." },
+    { emoji: "🍰", name: "조각 케이크", reason: "익절 기념 디저트도 가능." },
+  ],
+  neutral: [
+    { emoji: "☕", name: "믹스커피", reason: "무난하게 하루 마무리." },
+    { emoji: "🍬", name: "사탕 하나", reason: "입가심 정도로 충분." },
+  ],
+  loss: [
+    { emoji: "🥤", name: "정수기 물", reason: "오늘은 커피값도 아껴야지." },
+    { emoji: "☕", name: "탕비실 믹스커피", reason: "공짜가 최고의 디저트." },
+  ],
+};
+
 export function getBracket(rate) {
   return LUNCH_TABLE.find((b) => rate >= b.minInclusive);
+}
+
+export function pickAfterLunch(tone) {
+  const pool = AFTER_LUNCH[tone] ?? AFTER_LUNCH.neutral;
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
 export function pickLunch(rate) {

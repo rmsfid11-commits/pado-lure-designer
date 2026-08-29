@@ -384,6 +384,21 @@ body {
   min-height: 20px;
 }
 
+.reveal-after {
+  margin: 10px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.reveal-after.shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .reveal-actions {
   display: flex;
   flex-direction: column;

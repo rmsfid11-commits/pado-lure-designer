@@ -1,6 +1,6 @@
 import { createNumberField } from "../numberField.js";
 import { showReveal } from "../revealOverlay.js";
-import { pickLunch, ALL_MENU_NAMES } from "./roulette.data.js";
+import { pickLunch, pickAfterLunch, ALL_MENU_NAMES } from "./roulette.data.js";
 
 export function initRoulette() {
   const root = document.getElementById("panel-roulette");
@@ -30,6 +30,7 @@ export function initRoulette() {
           line2: `${result.menu}~`,
           comment: result.comment,
           tone: result.tone,
+          after: pickAfterLunch(result.tone),
         };
       },
     });
