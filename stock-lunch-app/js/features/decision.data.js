@@ -5,6 +5,12 @@
 const RAW_DECISION_MENUS = [
   { menu: "김밥", emoji: "🍙", solo: true, group: true, maxTime: 10, price: 3000, cuisine: "한식" },
   { menu: "편의점 도시락", emoji: "🍱", solo: true, group: false, maxTime: 5, price: 4500, cuisine: "기타" },
+  // 5천원 이하(예산 필터 1단계)가 한식/기타에만 있어서 다른 나라별을 고르면 예산 조건이 무시되던 문제 보강
+  { menu: "주먹밥", emoji: "🍙", solo: true, group: false, maxTime: 5, price: 3500, cuisine: "한식" },
+  { menu: "군만두", emoji: "🥟", solo: true, group: true, maxTime: 10, price: 4500, cuisine: "중식" },
+  { menu: "오니기리", emoji: "🍙", solo: true, group: false, maxTime: 5, price: 4000, cuisine: "일식" },
+  { menu: "베이글", emoji: "🥯", solo: true, group: false, maxTime: 5, price: 4000, cuisine: "양식" },
+  { menu: "스프링롤", emoji: "🥢", solo: true, group: true, maxTime: 10, price: 4500, cuisine: "아시안" },
   { menu: "구내식당", emoji: "🍚", solo: true, group: true, maxTime: 15, price: 6000, cuisine: "한식" },
   { menu: "라면", emoji: "🍜", solo: true, group: true, maxTime: 15, price: 5000, cuisine: "한식" },
   { menu: "국밥", emoji: "🍲", solo: true, group: true, maxTime: 20, price: 9000, cuisine: "한식" },
