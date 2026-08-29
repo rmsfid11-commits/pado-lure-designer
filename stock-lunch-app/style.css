@@ -82,8 +82,15 @@ body {
 .stepper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 22px;
+}
+
+/* 오른쪽 화살표 버튼과 같은 너비의 투명 여백을 왼쪽에 둬서, 숫자가 화살표에
+   밀리지 않고 카드 가운데에 오도록 한다. */
+.stepper::before {
+  content: "";
+  width: 40px;
+  flex-shrink: 0;
 }
 
 .spin-buttons {
@@ -121,11 +128,13 @@ body {
 }
 
 .rate-display {
+  flex: 1;
   margin: 0;
   font-size: 40px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.5px;
+  text-align: center;
   touch-action: none;
   cursor: ns-resize;
   user-select: none;
