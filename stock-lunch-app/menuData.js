@@ -9,6 +9,7 @@ const LUNCH_TABLE = [
     label: "+3% 이상",
     minInclusive: 3,
     emoji: "🚀",
+    tone: "gain",
     options: [
       { menu: "삼겹살", comment: "오늘은 계좌가 쏜다." },
       { menu: "소고기", comment: "익절한 김에 고기 파티." },
@@ -20,6 +21,7 @@ const LUNCH_TABLE = [
     label: "+1% ~ +3%",
     minInclusive: 1,
     emoji: "😋",
+    tone: "gain",
     options: [
       { menu: "돈까스", comment: "수익도 났겠다 든든하게." },
       { menu: "초밥", comment: "이 정도면 한 접시 정돈 괜찮지." },
@@ -31,6 +33,7 @@ const LUNCH_TABLE = [
     label: "-1% ~ +1%",
     minInclusive: -1,
     emoji: "😐",
+    tone: "neutral",
     options: [
       { menu: "국밥", comment: "시장도 점심도 보합." },
       { menu: "김치찌개", comment: "오늘은 그냥 무난하게." },
@@ -42,6 +45,7 @@ const LUNCH_TABLE = [
     label: "-1% ~ -3%",
     minInclusive: -3,
     emoji: "😥",
+    tone: "loss",
     options: [
       { menu: "김밥", comment: "오늘은 방어적으로 간다." },
       { menu: "샌드위치", comment: "지갑도 계좌도 아껴야 할 때." },
@@ -53,6 +57,7 @@ const LUNCH_TABLE = [
     label: "-3% 이하",
     minInclusive: -Infinity,
     emoji: "💀",
+    tone: "loss",
     options: [
       { menu: "편의점 도시락", comment: "계좌가 다이어트를 시켰다." },
       { menu: "삼각김밥", comment: "존버는 배고프다." },
@@ -70,5 +75,8 @@ function getBracket(rate) {
 function pickLunch(rate) {
   const bracket = getBracket(rate);
   const option = bracket.options[Math.floor(Math.random() * bracket.options.length)];
-  return { ...option, label: bracket.label, emoji: bracket.emoji };
+  return { ...option, label: bracket.label, emoji: bracket.emoji, tone: bracket.tone };
 }
+
+// 슬롯 연출용: 전체 구간의 메뉴 이름을 한 배열로 모아둠
+const ALL_MENU_NAMES = LUNCH_TABLE.flatMap((b) => b.options.map((o) => o.menu));

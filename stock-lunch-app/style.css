@@ -115,6 +115,34 @@ body {
   margin-left: 8px;
 }
 
+.quick-chips {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.chip {
+  flex: 1;
+  border: 1.5px solid var(--border);
+  background: #f8f9fa;
+  color: var(--text-secondary);
+  border-radius: 999px;
+  padding: 9px 0;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.05s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.chip:hover {
+  border-color: var(--toss-blue);
+  color: var(--toss-blue-dark);
+}
+
+.chip:active {
+  transform: scale(0.95);
+}
+
 .btn-primary,
 .btn-secondary {
   width: 100%;
@@ -140,6 +168,13 @@ body {
   transform: scale(0.98);
 }
 
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.55;
+  cursor: default;
+  transform: none;
+}
+
 .btn-secondary {
   background: #eef3ff;
   color: var(--toss-blue-dark);
@@ -152,7 +187,28 @@ body {
 
 .result-card {
   text-align: center;
-  animation: pop-in 0.25s ease;
+  border-top: 4px solid var(--border);
+  transition: border-color 0.2s ease;
+}
+
+.result-card.tone-gain {
+  border-top-color: #f04452;
+}
+
+.result-card.tone-neutral {
+  border-top-color: #8b95a1;
+}
+
+.result-card.tone-loss {
+  border-top-color: #3182f6;
+}
+
+.result-card.settled {
+  animation: pop-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.result-card.shuffling .result-menu {
+  color: var(--text-tertiary);
 }
 
 .result-range {
@@ -173,6 +229,7 @@ body {
   font-size: 28px;
   font-weight: 800;
   letter-spacing: -0.5px;
+  transition: color 0.1s ease;
 }
 
 .result-comment {
