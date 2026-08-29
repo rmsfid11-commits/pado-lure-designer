@@ -1,8 +1,9 @@
-const rateInput = document.getElementById("returnRate");
+const rateValue = document.getElementById("rateValue");
+const incBtn = document.getElementById("incBtn");
+const decBtn = document.getElementById("decBtn");
 const drawBtn = document.getElementById("drawBtn");
 const reDrawBtn = document.getElementById("reDrawBtn");
 const closeBtn = document.getElementById("closeBtn");
-const errorMsg = document.getElementById("errorMsg");
 
 const overlay = document.getElementById("resultOverlay");
 const resultCard = document.getElementById("resultCard");
@@ -17,9 +18,50 @@ const SHUFFLE_TICK = 55;
 const CONFETTI_COLORS = ["#3182f6", "#f04452", "#ffb84d", "#4caf82", "#8b5cf6"];
 const TONES = ["tone-gain", "tone-neutral", "tone-loss"];
 
+const RATE_MIN = -20;
+const RATE_MAX = 20;
+const RATE_STEP = 1;
+const HOLD_REPEAT_DELAY = 400;
+const HOLD_REPEAT_INTERVAL = 90;
+
+let currentRate = 0;
+
 function formatRate(rate) {
   const sign = rate > 0 ? "+" : "";
   return `${sign}${rate}%`;
+}
+
+function renderRate() {
+  rateValue.textContent = currentRate > 0 ? `+${currentRate}` : `${currentRate}`;
+}
+
+function adjustRate(delta) {
+  currentRate = Math.min(RATE_MAX, Math.max(RATE_MIN, currentRate + delta));
+  renderRate();
+}
+
+function bindStepperHold(button, delta) {
+  let holdTimer = null;
+  let repeatTimer = null;
+
+  const stop = () => {
+    clearTimeout(holdTimer);
+    clearInterval(repeatTimer);
+    holdTimer = null;
+    repeatTimer = null;
+  };
+
+  button.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    adjustRate(delta);
+    holdTimer = setTimeout(() => {
+      repeatTimer = setInterval(() => adjustRate(delta), HOLD_REPEAT_INTERVAL);
+    }, HOLD_REPEAT_DELAY);
+  });
+
+  ["pointerup", "pointerleave", "pointercancel"].forEach((evt) =>
+    button.addEventListener(evt, stop)
+  );
 }
 
 function spawnConfetti() {
@@ -89,16 +131,7 @@ function shuffleThenReveal(rate) {
 }
 
 function handleDraw() {
-  const value = rateInput.value.trim();
-  const rate = Number(value);
-
-  if (value === "" || Number.isNaN(rate)) {
-    errorMsg.classList.remove("hidden");
-    return;
-  }
-
-  errorMsg.classList.add("hidden");
-  shuffleThenReveal(rate);
+  shuffleThenReveal(currentRate);
 }
 
 function closeOverlay() {
@@ -106,12 +139,13 @@ function closeOverlay() {
   confettiLayer.innerHTML = "";
 }
 
+renderRate();
+bindStepperHold(incBtn, RATE_STEP);
+bindStepperHold(decBtn, -RATE_STEP);
+
 drawBtn.addEventListener("click", handleDraw);
-reDrawBtn.addEventListener("click", () => handleDraw());
+reDrawBtn.addEventListener("click", handleDraw);
 closeBtn.addEventListener("click", closeOverlay);
 overlay.addEventListener("click", (e) => {
   if (e.target === overlay) closeOverlay();
-});
-rateInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") handleDraw();
 });

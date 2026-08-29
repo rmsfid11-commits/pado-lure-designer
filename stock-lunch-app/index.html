@@ -12,18 +12,12 @@
     <p class="subtitle">오늘 계좌 수익률로 점심 메뉴 뽑기</p>
 
     <section class="input-card">
-      <div class="input-row">
-        <input
-          id="returnRate"
-          type="number"
-          inputmode="decimal"
-          step="0.1"
-          placeholder="오늘 수익률"
-        />
-        <span class="unit">%</span>
+      <div class="stepper">
+        <button id="incBtn" type="button" class="step-btn" aria-label="수익률 올리기">▲</button>
+        <p class="rate-display" aria-live="polite"><span id="rateValue">0</span><span class="unit">%</span></p>
+        <button id="decBtn" type="button" class="step-btn" aria-label="수익률 내리기">▼</button>
       </div>
       <button id="drawBtn" class="btn-primary">오늘 점심 뽑기</button>
-      <p id="errorMsg" class="error-msg hidden">수익률을 숫자로 입력해주세요.</p>
     </section>
   </main>
 
