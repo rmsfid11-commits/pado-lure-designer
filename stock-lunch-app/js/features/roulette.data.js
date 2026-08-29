@@ -11,12 +11,12 @@ export const LUNCH_TABLE = [
     options: [
       { menu: "삼겹살", price: 15000, comment: "오늘은 계좌가 쏜다." },
       { menu: "소고기", price: 25000, comment: "익절한 김에 고기 파티." },
-      { menu: "오마카세", price: 80000, comment: "일단 오늘만큼은 플렉스." },
+      { menu: "런치 오마카세", price: 35000, comment: "일단 오늘만큼은 플렉스." },
       { menu: "한우", price: 40000, comment: "이 정도면 가불 아니고 리얼 수익이다." },
       { menu: "스테이크", price: 28000, comment: "오늘만큼은 손 크게 나가도 된다." },
-      { menu: "랍스터", price: 45000, comment: "익절 기념으로 갑각류 정돈 가능." },
-      { menu: "참치회", price: 35000, comment: "부위별로 다 시켜도 되는 날." },
-      { menu: "코스요리", price: 50000, comment: "전채부터 디저트까지 완주." },
+      { menu: "장어구이", price: 30000, comment: "몸보신까지 챙기는 익절 세리머니." },
+      { menu: "참치집 런치세트", price: 30000, comment: "부위별로 다 시켜도 되는 날." },
+      { menu: "이자카야 코스", price: 35000, comment: "역시 오늘은 좀 취해도 되는 날." },
     ],
   },
   {

@@ -13,7 +13,7 @@ const RAW_DECISION_MENUS = [
   { menu: "부대찌개", emoji: "🍲", solo: false, group: true, maxTime: 25, price: 9000 },
   { menu: "찜닭", emoji: "🍗", solo: false, group: true, maxTime: 30, price: 13000 },
   { menu: "삼겹살", emoji: "🥓", solo: false, group: true, maxTime: 40, price: 15000 },
-  { menu: "오마카세", emoji: "🍣", solo: true, group: true, maxTime: 40, price: 80000 },
+  { menu: "런치 오마카세", emoji: "🍣", solo: true, group: true, maxTime: 40, price: 35000 },
   { menu: "김치찌개", emoji: "🫕", solo: true, group: true, maxTime: 25, price: 8000 },
   { menu: "짜장면", emoji: "🥡", solo: true, group: true, maxTime: 15, price: 7000 },
   { menu: "회덮밥", emoji: "🐟", solo: true, group: true, maxTime: 20, price: 12000 },
