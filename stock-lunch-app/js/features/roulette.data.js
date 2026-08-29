@@ -1,4 +1,5 @@
 // 수익률 구간별 메뉴 데이터 (하드코딩, 외부 데이터/API 없음)
+// price는 대략적인 1인 기준 평균 체감가(원). 실제 시세 API 연동 아님 — 손맛으로 잡은 값.
 // 구간은 위에서부터 순서대로 검사하며, minInclusive 이상이면 해당 구간으로 확정된다.
 export const LUNCH_TABLE = [
   {
@@ -8,11 +9,14 @@ export const LUNCH_TABLE = [
     emoji: "🚀",
     tone: "gain",
     options: [
-      { menu: "삼겹살", comment: "오늘은 계좌가 쏜다." },
-      { menu: "소고기", comment: "익절한 김에 고기 파티." },
-      { menu: "오마카세", comment: "일단 오늘만큼은 플렉스." },
-      { menu: "한우", comment: "이 정도면 가불 아니고 리얼 수익이다." },
-      { menu: "스테이크", comment: "오늘만큼은 손 크게 나가도 된다." },
+      { menu: "삼겹살", price: 15000, comment: "오늘은 계좌가 쏜다." },
+      { menu: "소고기", price: 25000, comment: "익절한 김에 고기 파티." },
+      { menu: "오마카세", price: 80000, comment: "일단 오늘만큼은 플렉스." },
+      { menu: "한우", price: 40000, comment: "이 정도면 가불 아니고 리얼 수익이다." },
+      { menu: "스테이크", price: 28000, comment: "오늘만큼은 손 크게 나가도 된다." },
+      { menu: "랍스터", price: 45000, comment: "익절 기념으로 갑각류 정돈 가능." },
+      { menu: "참치회", price: 35000, comment: "부위별로 다 시켜도 되는 날." },
+      { menu: "코스요리", price: 50000, comment: "전채부터 디저트까지 완주." },
     ],
   },
   {
@@ -22,11 +26,14 @@ export const LUNCH_TABLE = [
     emoji: "😋",
     tone: "gain",
     options: [
-      { menu: "돈까스", comment: "수익도 났겠다 든든하게." },
-      { menu: "초밥", comment: "이 정도면 한 접시 정돈 괜찮지." },
-      { menu: "찜닭", comment: "무난하게 든든한 한 끼." },
-      { menu: "부대찌개", comment: "이 정도 수익이면 사리 추가요." },
-      { menu: "치킨마요덮밥", comment: "적당히 배부르게, 적당히 뿌듯하게." },
+      { menu: "돈까스", price: 10000, comment: "수익도 났겠다 든든하게." },
+      { menu: "초밥", price: 12000, comment: "이 정도면 한 접시 정돈 괜찮지." },
+      { menu: "찜닭", price: 13000, comment: "무난하게 든든한 한 끼." },
+      { menu: "부대찌개", price: 9000, comment: "이 정도 수익이면 사리 추가요." },
+      { menu: "치킨마요덮밥", price: 7000, comment: "적당히 배부르게, 적당히 뿌듯하게." },
+      { menu: "회덮밥", price: 12000, comment: "적당히 신선하게 채워봅니다." },
+      { menu: "갈비탕", price: 11000, comment: "뜨끈하고 든든하게." },
+      { menu: "파스타", price: 13000, comment: "오늘은 양식 기분." },
     ],
   },
   {
@@ -36,11 +43,14 @@ export const LUNCH_TABLE = [
     emoji: "😐",
     tone: "neutral",
     options: [
-      { menu: "국밥", comment: "시장도 점심도 보합." },
-      { menu: "김치찌개", comment: "오늘은 그냥 무난하게." },
-      { menu: "제육볶음", comment: "특별할 것 없는 하루, 든든하게만." },
-      { menu: "비빔밥", comment: "오르지도 내리지도 않는 내 마음처럼 잘 비벼서." },
-      { menu: "구내식당", comment: "오늘은 그냥 회사 밥이 진리다." },
+      { menu: "국밥", price: 9000, comment: "시장도 점심도 보합." },
+      { menu: "김치찌개", price: 8000, comment: "오늘은 그냥 무난하게." },
+      { menu: "제육볶음", price: 9000, comment: "특별할 것 없는 하루, 든든하게만." },
+      { menu: "비빔밥", price: 9000, comment: "오르지도 내리지도 않는 내 마음처럼 잘 비벼서." },
+      { menu: "구내식당", price: 6000, comment: "오늘은 그냥 회사 밥이 진리다." },
+      { menu: "된장찌개", price: 8000, comment: "이것도 저것도 아닌 무난함." },
+      { menu: "짜장면", price: 7000, comment: "고민될 땐 짜장면이 국룰." },
+      { menu: "분식 세트", price: 7000, comment: "다 조금씩 먹고 싶을 때." },
     ],
   },
   {
@@ -50,11 +60,14 @@ export const LUNCH_TABLE = [
     emoji: "😥",
     tone: "loss",
     options: [
-      { menu: "김밥", comment: "오늘은 방어적으로 간다." },
-      { menu: "샌드위치", comment: "지갑도 계좌도 아껴야 할 때." },
-      { menu: "라면", comment: "손실 구간엔 손실 구간의 메뉴가 있다." },
-      { menu: "컵라면", comment: "물만 부어도 위로가 되는 맛." },
-      { menu: "떡볶이", comment: "맵게 먹고 오늘 손실은 잊자." },
+      { menu: "김밥", price: 3000, comment: "오늘은 방어적으로 간다." },
+      { menu: "샌드위치", price: 6000, comment: "지갑도 계좌도 아껴야 할 때." },
+      { menu: "라면", price: 5000, comment: "손실 구간엔 손실 구간의 메뉴가 있다." },
+      { menu: "컵라면", price: 1500, comment: "물만 부어도 위로가 되는 맛." },
+      { menu: "떡볶이", price: 5000, comment: "맵게 먹고 오늘 손실은 잊자." },
+      { menu: "토스트", price: 4000, comment: "간단하게 때우는 게 답." },
+      { menu: "우동", price: 6000, comment: "따뜻하게라도 위로받자." },
+      { menu: "핫도그", price: 4000, comment: "길거리 음식으로 버티는 날." },
     ],
   },
   {
@@ -64,11 +77,14 @@ export const LUNCH_TABLE = [
     emoji: "💀",
     tone: "loss",
     options: [
-      { menu: "편의점 도시락", comment: "계좌가 다이어트를 시켰다." },
-      { menu: "삼각김밥", comment: "존버는 배고프다." },
-      { menu: "물만 마시기", comment: "오늘은... 내일 다시 보자." },
-      { menu: "공복 유지", comment: "오늘 점심은 그냥 존버다." },
-      { menu: "탕비실 믹스커피", comment: "밥값도 아끼는 게 손실 방어다." },
+      { menu: "편의점 도시락", price: 4500, comment: "계좌가 다이어트를 시켰다." },
+      { menu: "삼각김밥", price: 1500, comment: "존버는 배고프다." },
+      { menu: "물만 마시기", price: 0, comment: "오늘은... 내일 다시 보자." },
+      { menu: "공복 유지", price: 0, comment: "오늘 점심은 그냥 존버다." },
+      { menu: "탕비실 믹스커피", price: 0, comment: "밥값도 아끼는 게 손실 방어다." },
+      { menu: "즉석밥+김", price: 2000, comment: "그래도 뭔가는 먹어야지." },
+      { menu: "회사 정수기 물", price: 0, comment: "무한리필의 미학." },
+      { menu: "아무것도 안 먹기", price: 0, comment: "이게 최선의 절약이다." },
     ],
   },
 ];

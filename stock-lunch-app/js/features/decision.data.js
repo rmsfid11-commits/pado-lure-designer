@@ -1,20 +1,37 @@
-// 30초 결정용 메뉴 풀 (하드코딩). solo/group, 소요 시간, 가격대로 태깅해두고
+// 30초 결정용 메뉴 풀 (하드코딩). solo/group, 소요 시간, 평균 가격으로 태깅해두고
 // 사용자가 고른 조건으로 필터링 후 무작위로 하나를 뽑는다.
-// priceTier: 1 = 5천원대, 2 = 1만원대, 3 = 1.5만원 이상
-export const DECISION_MENUS = [
-  { menu: "김밥", emoji: "🍙", solo: true, group: true, maxTime: 10, priceTier: 1 },
-  { menu: "편의점 도시락", emoji: "🍱", solo: true, group: false, maxTime: 5, priceTier: 1 },
-  { menu: "구내식당", emoji: "🍚", solo: true, group: true, maxTime: 15, priceTier: 1 },
-  { menu: "라면", emoji: "🍜", solo: true, group: true, maxTime: 15, priceTier: 1 },
-  { menu: "국밥", emoji: "🍲", solo: true, group: true, maxTime: 20, priceTier: 1 },
-  { menu: "샐러드", emoji: "🥗", solo: true, group: true, maxTime: 10, priceTier: 2 },
-  { menu: "돈까스", emoji: "🍱", solo: true, group: true, maxTime: 20, priceTier: 2 },
-  { menu: "초밥", emoji: "🍣", solo: true, group: true, maxTime: 25, priceTier: 2 },
-  { menu: "부대찌개", emoji: "🍲", solo: false, group: true, maxTime: 25, priceTier: 2 },
-  { menu: "찜닭", emoji: "🍗", solo: false, group: true, maxTime: 30, priceTier: 2 },
-  { menu: "삼겹살", emoji: "🥓", solo: false, group: true, maxTime: 40, priceTier: 3 },
-  { menu: "오마카세", emoji: "🍣", solo: true, group: true, maxTime: 40, priceTier: 3 },
+// price는 대략적인 1인 기준 평균 체감가(원) — 여기서 예산 태그(priceTier)를 자동으로 계산한다.
+const RAW_DECISION_MENUS = [
+  { menu: "김밥", emoji: "🍙", solo: true, group: true, maxTime: 10, price: 3000 },
+  { menu: "편의점 도시락", emoji: "🍱", solo: true, group: false, maxTime: 5, price: 4500 },
+  { menu: "구내식당", emoji: "🍚", solo: true, group: true, maxTime: 15, price: 6000 },
+  { menu: "라면", emoji: "🍜", solo: true, group: true, maxTime: 15, price: 5000 },
+  { menu: "국밥", emoji: "🍲", solo: true, group: true, maxTime: 20, price: 9000 },
+  { menu: "샐러드", emoji: "🥗", solo: true, group: true, maxTime: 10, price: 9000 },
+  { menu: "돈까스", emoji: "🍱", solo: true, group: true, maxTime: 20, price: 10000 },
+  { menu: "초밥", emoji: "🍣", solo: true, group: true, maxTime: 25, price: 12000 },
+  { menu: "부대찌개", emoji: "🍲", solo: false, group: true, maxTime: 25, price: 9000 },
+  { menu: "찜닭", emoji: "🍗", solo: false, group: true, maxTime: 30, price: 13000 },
+  { menu: "삼겹살", emoji: "🥓", solo: false, group: true, maxTime: 40, price: 15000 },
+  { menu: "오마카세", emoji: "🍣", solo: true, group: true, maxTime: 40, price: 80000 },
+  { menu: "김치찌개", emoji: "🫕", solo: true, group: true, maxTime: 25, price: 8000 },
+  { menu: "짜장면", emoji: "🥡", solo: true, group: true, maxTime: 15, price: 7000 },
+  { menu: "회덮밥", emoji: "🐟", solo: true, group: true, maxTime: 20, price: 12000 },
+  { menu: "갈비탕", emoji: "🍖", solo: true, group: true, maxTime: 20, price: 11000 },
+  { menu: "떡볶이", emoji: "🌶️", solo: true, group: true, maxTime: 10, price: 5000 },
+  { menu: "샌드위치", emoji: "🥪", solo: true, group: false, maxTime: 5, price: 6000 },
+  { menu: "파스타", emoji: "🍝", solo: true, group: true, maxTime: 25, price: 13000 },
+  { menu: "소고기", emoji: "🥩", solo: false, group: true, maxTime: 40, price: 25000 },
 ];
+
+// 5천원 이하 -> 1, 1만원 이하 -> 2, 그 이상 -> 3 (priceGroup 필터 pill 라벨과 맞춤)
+function priceToTier(price) {
+  if (price <= 5000) return 1;
+  if (price <= 10000) return 2;
+  return 3;
+}
+
+export const DECISION_MENUS = RAW_DECISION_MENUS.map((m) => ({ ...m, priceTier: priceToTier(m.price) }));
 
 const DECISION_COMMENTS = [
   "고민 끝, 이걸로 가자.",

@@ -2,6 +2,8 @@ import { createNumberField } from "../numberField.js";
 import { showReveal } from "../revealOverlay.js";
 import { pickLunch, pickAfterLunch, ALL_MENU_NAMES } from "./roulette.data.js";
 
+const formatPrice = (price) => (price > 0 ? `약 ${price.toLocaleString("ko-KR")}원` : "0원");
+
 export function initRoulette() {
   const root = document.getElementById("panel-roulette");
   const drawBtn = root.querySelector("[data-role='drawBtn']");
@@ -28,7 +30,7 @@ export function initRoulette() {
           emoji: result.emoji,
           line1: `오늘은 ${sign}${rate}%군요,`,
           line2: `${result.menu}~`,
-          comment: result.comment,
+          comment: `${result.comment} (${formatPrice(result.price)})`,
           tone: result.tone,
           after: pickAfterLunch(result.tone),
         };
