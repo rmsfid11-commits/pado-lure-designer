@@ -2,6 +2,7 @@ import { createNumberField } from "../numberField.js";
 import { spawnConfettiInto } from "../revealOverlay.js";
 
 const WORK_DAYS_PER_MONTH = 22; // 하드코딩된 월 근무일수 (화면에도 이 가정을 표시함)
+const ASSUMED_DIVIDEND_YIELD = 0.04; // 실제 종목 배당률 아님 — 국내 고배당(비커버드콜) 평균에 가까운 가정치
 const won = (v) => `${v.toLocaleString("ko-KR")}원`;
 
 // 상황(구간)별 문구를 여러 개 둬서 매번 다르게 보이게 함. 드래그 중에는
@@ -48,6 +49,7 @@ export function initSavings() {
   const resultConfetti = root.querySelector("[data-role='resultConfetti']");
   const resultEmoji = root.querySelector("[data-role='resultEmoji']");
   const resultMessage = root.querySelector("[data-role='resultMessage']");
+  const resultDividend = root.querySelector("[data-role='resultDividend']");
 
   let ready = false;
   let lastKey = null;
@@ -80,6 +82,14 @@ export function initSavings() {
 
     resultEmoji.textContent = group.emoji;
     resultMessage.textContent = cachedTemplate(dailySaving, monthlySaving, shares);
+
+    const annualShares = dailySaving > 0 ? Math.floor((monthlySaving * 12) / stockPrice) : 0;
+    if (annualShares > 0) {
+      const annualDividend = Math.round(annualShares * stockPrice * ASSUMED_DIVIDEND_YIELD);
+      resultDividend.textContent = `💰 1년 모으면 ${annualShares}주 — 연 배당(4% 가정) 약 ${won(annualDividend)}`;
+    } else {
+      resultDividend.textContent = "";
+    }
   }
 
   const usualField = createNumberField({

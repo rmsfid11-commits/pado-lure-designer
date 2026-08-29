@@ -288,6 +288,16 @@ body {
   color: var(--text-secondary);
 }
 
+.inline-result-dividend {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.inline-result-dividend:empty {
+  display: none;
+}
+
 .inline-result-note {
   margin: 8px 0 0;
   font-size: 12px;
