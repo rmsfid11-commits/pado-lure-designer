@@ -22,6 +22,11 @@ const RAW_DECISION_MENUS = [
   { menu: "샌드위치", emoji: "🥪", solo: true, group: false, maxTime: 5, price: 6000 },
   { menu: "파스타", emoji: "🍝", solo: true, group: true, maxTime: 25, price: 13000 },
   { menu: "소고기", emoji: "🥩", solo: false, group: true, maxTime: 40, price: 25000 },
+  { menu: "제육볶음", emoji: "🥘", solo: true, group: true, maxTime: 20, price: 9000 },
+  { menu: "된장찌개", emoji: "🍲", solo: true, group: true, maxTime: 20, price: 8000 },
+  { menu: "냉면", emoji: "🍜", solo: true, group: true, maxTime: 15, price: 9000 },
+  { menu: "김치찜", emoji: "🫕", solo: true, group: true, maxTime: 30, price: 12000 },
+  { menu: "돼지갈비", emoji: "🥓", solo: false, group: true, maxTime: 40, price: 17000 },
 ];
 
 // 5천원 이하 -> 1, 1만원 이하 -> 2, 그 이상 -> 3 (priceGroup 필터 pill 라벨과 맞춤)

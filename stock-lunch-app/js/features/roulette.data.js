@@ -31,9 +31,9 @@ export const LUNCH_TABLE = [
       { menu: "찜닭", price: 13000, comment: "무난하게 든든한 한 끼." },
       { menu: "부대찌개", price: 9000, comment: "이 정도 수익이면 사리 추가요." },
       { menu: "치킨마요덮밥", price: 7000, comment: "적당히 배부르게, 적당히 뿌듯하게." },
-      { menu: "회덮밥", price: 12000, comment: "적당히 신선하게 채워봅니다." },
+      { menu: "돼지갈비", price: 17000, comment: "삼겹살 말고 오늘은 갈비 정돈 괜찮지." },
       { menu: "갈비탕", price: 11000, comment: "뜨끈하고 든든하게." },
-      { menu: "파스타", price: 13000, comment: "오늘은 양식 기분." },
+      { menu: "냉면", price: 9000, comment: "이 정도 수익엔 시원하게 한 그릇." },
     ],
   },
   {
@@ -50,7 +50,7 @@ export const LUNCH_TABLE = [
       { menu: "구내식당", price: 6000, comment: "오늘은 그냥 회사 밥이 진리다." },
       { menu: "된장찌개", price: 8000, comment: "이것도 저것도 아닌 무난함." },
       { menu: "짜장면", price: 7000, comment: "고민될 땐 짜장면이 국룰." },
-      { menu: "분식 세트", price: 7000, comment: "다 조금씩 먹고 싶을 때." },
+      { menu: "김치찜", price: 12000, comment: "속은 얼큰하게, 마음은 무난하게." },
     ],
   },
   {
