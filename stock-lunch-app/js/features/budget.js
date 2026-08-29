@@ -1,10 +1,14 @@
 import { createNumberField } from "../numberField.js";
 import { findBudgetTier, pickBudgetComment } from "./budget.data.js";
+import { spawnConfettiInto } from "../revealOverlay.js";
 
 const won = (v) => `${v.toLocaleString("ko-KR")}원`;
 
 export function initBudget() {
   const root = document.getElementById("panel-budget");
+  const resultBox = root.querySelector("[data-role='result']");
+  const resultConfetti = root.querySelector("[data-role='resultConfetti']");
+  const resultEmoji = root.querySelector("[data-role='resultEmoji']");
   const resultAmount = root.querySelector("[data-role='resultAmount']");
   const resultComment = root.querySelector("[data-role='resultComment']");
 
@@ -15,10 +19,22 @@ export function initBudget() {
     if (!ready) return;
     const todayBudget = Math.round(budgetField.get() / daysField.get() / 500) * 500;
     const tier = findBudgetTier(todayBudget);
+
     if (tier !== lastTier) {
       lastTier = tier;
       cachedComment = pickBudgetComment(tier);
+
+      resultBox.classList.remove("settled");
+      void resultBox.offsetWidth;
+      resultBox.classList.add("settled");
+
+      if (tier.best) {
+        spawnConfettiInto(resultConfetti, 18);
+        if (navigator.vibrate) navigator.vibrate(20);
+      }
     }
+
+    resultEmoji.textContent = tier.emoji;
     resultAmount.textContent = won(todayBudget);
     resultComment.textContent = cachedComment;
   }

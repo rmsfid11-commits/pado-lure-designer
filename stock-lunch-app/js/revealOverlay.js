@@ -12,9 +12,9 @@ let currentOnRedraw = null;
 let currentShuffleNames = [];
 let afterRevealTimer = null;
 
-function spawnConfetti() {
-  confettiLayer.innerHTML = "";
-  const pieceCount = 26;
+// 다른 탭(예산/절약 계산기)도 특별한 순간엔 같은 컨페티를 재사용할 수 있게 공개.
+export function spawnConfettiInto(layerEl, pieceCount = 26) {
+  layerEl.innerHTML = "";
 
   for (let i = 0; i < pieceCount; i++) {
     const piece = document.createElement("span");
@@ -28,7 +28,7 @@ function spawnConfetti() {
     piece.style.setProperty("--rot", `${Math.random() * 720 - 360}deg`);
     piece.style.setProperty("--delay", `${Math.random() * 90}ms`);
     piece.style.background = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
-    confettiLayer.appendChild(piece);
+    layerEl.appendChild(piece);
   }
 }
 
@@ -47,7 +47,7 @@ function renderFinal({ emoji, line1, line2, comment, tone, after }) {
   resultCard.classList.remove("settled");
   void resultCard.offsetWidth;
   resultCard.classList.add("settled");
-  spawnConfetti();
+  spawnConfettiInto(confettiLayer);
 
   if (navigator.vibrate) navigator.vibrate(20);
 
