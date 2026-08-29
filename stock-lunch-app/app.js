@@ -1,4 +1,5 @@
 const rateValue = document.getElementById("rateValue");
+const rateDisplay = document.getElementById("rateDisplay");
 const incBtn = document.getElementById("incBtn");
 const decBtn = document.getElementById("decBtn");
 const drawBtn = document.getElementById("drawBtn");
@@ -38,6 +39,45 @@ function renderRate() {
 function adjustRate(delta) {
   currentRate = Math.min(RATE_MAX, Math.max(RATE_MIN, currentRate + delta));
   renderRate();
+}
+
+const DRAG_PIXELS_PER_STEP = 14;
+
+function bindDragScrub(el) {
+  let dragging = false;
+  let startY = 0;
+  let startRate = 0;
+  let lastSteps = 0;
+
+  el.addEventListener("pointerdown", (e) => {
+    dragging = true;
+    startY = e.clientY;
+    startRate = currentRate;
+    lastSteps = 0;
+    el.setPointerCapture(e.pointerId);
+    el.classList.add("dragging");
+  });
+
+  el.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const deltaY = startY - e.clientY; // 위로 끌면 양수 -> 값 증가
+    const steps = Math.round(deltaY / DRAG_PIXELS_PER_STEP);
+    if (steps === lastSteps) return;
+    lastSteps = steps;
+    const nextRate = Math.min(RATE_MAX, Math.max(RATE_MIN, startRate + steps));
+    if (nextRate !== currentRate) {
+      currentRate = nextRate;
+      renderRate();
+      if (navigator.vibrate) navigator.vibrate(4);
+    }
+  });
+
+  const endDrag = () => {
+    dragging = false;
+    el.classList.remove("dragging");
+  };
+  el.addEventListener("pointerup", endDrag);
+  el.addEventListener("pointercancel", endDrag);
 }
 
 function bindStepperHold(button, delta) {
@@ -142,6 +182,7 @@ function closeOverlay() {
 renderRate();
 bindStepperHold(incBtn, RATE_STEP);
 bindStepperHold(decBtn, -RATE_STEP);
+bindDragScrub(rateDisplay);
 
 drawBtn.addEventListener("click", handleDraw);
 reDrawBtn.addEventListener("click", handleDraw);

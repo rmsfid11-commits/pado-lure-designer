@@ -14,9 +14,12 @@
     <section class="input-card">
       <div class="stepper">
         <button id="incBtn" type="button" class="step-btn" aria-label="수익률 올리기">▲</button>
-        <p class="rate-display" aria-live="polite"><span id="rateValue">0</span><span class="unit">%</span></p>
+        <p id="rateDisplay" class="rate-display" aria-live="polite">
+          <span id="rateValue">0</span><span class="unit">%</span>
+        </p>
         <button id="decBtn" type="button" class="step-btn" aria-label="수익률 내리기">▼</button>
       </div>
+      <p class="stepper-hint">숫자를 위아래로 끌어도 돼요</p>
       <button id="drawBtn" class="btn-primary">오늘 점심 뽑기</button>
     </section>
   </main>

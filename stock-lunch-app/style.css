@@ -94,6 +94,18 @@ body {
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.5px;
+  touch-action: none;
+  cursor: ns-resize;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 4px 24px;
+  border-radius: 12px;
+  transition: background 0.1s ease;
+}
+
+.rate-display:active,
+.rate-display.dragging {
+  background: rgba(49, 130, 246, 0.08);
 }
 
 .rate-display .unit {
@@ -101,6 +113,12 @@ body {
   font-weight: 700;
   color: var(--text-tertiary);
   margin-left: 4px;
+}
+
+.stepper-hint {
+  margin: -10px 0 14px;
+  font-size: 12px;
+  color: var(--text-tertiary);
 }
 
 .btn-primary {
