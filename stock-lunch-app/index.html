@@ -3,44 +3,176 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <title>주식쟁이 점심룰렛</title>
+  <title>직장인 주식러 점심 도우미</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="app">
-    <h1>주식쟁이 점심룰렛</h1>
-    <p class="subtitle">오늘 계좌 수익률로 점심 메뉴 뽑기</p>
+    <!-- 1. 주식쟁이 점심룰렛 -->
+    <section id="panel-roulette" class="panel" data-panel="roulette">
+      <h1>주식쟁이 점심룰렛</h1>
+      <p class="subtitle">오늘 계좌 수익률로 점심 메뉴 뽑기</p>
 
-    <section class="input-card">
-      <div class="stepper">
-        <p id="rateDisplay" class="rate-display" aria-live="polite">
-          <span id="rateValue">0</span><span class="unit">%</span>
-        </p>
-        <div class="spin-buttons">
-          <button id="incBtn" type="button" class="spin-btn" aria-label="수익률 올리기">▲</button>
-          <button id="decBtn" type="button" class="spin-btn" aria-label="수익률 내리기">▼</button>
+      <section class="input-card">
+        <div class="stepper">
+          <p data-role="rateDisplay" class="rate-display" aria-live="polite">
+            <span data-role="rateValue">0</span><span class="unit">%</span>
+          </p>
+          <div class="spin-buttons">
+            <button data-role="incBtn" type="button" class="spin-btn" aria-label="수익률 올리기">▲</button>
+            <button data-role="decBtn" type="button" class="spin-btn" aria-label="수익률 내리기">▼</button>
+          </div>
         </div>
-      </div>
-      <p class="stepper-hint">숫자를 위아래로 끌어도 돼요</p>
-      <button id="drawBtn" class="btn-primary">오늘 점심 뽑기</button>
+        <p class="stepper-hint">숫자를 위아래로 끌어도 돼요</p>
+        <button data-role="drawBtn" class="btn-primary">오늘 점심 뽑기</button>
+      </section>
+    </section>
+
+    <!-- 2. 오늘 점심 얼마까지? -->
+    <section id="panel-budget" class="panel hidden" data-panel="budget">
+      <h1>오늘 점심 얼마까지?</h1>
+      <p class="subtitle">월급날까지 남은 돈으로 오늘 예산 정하기</p>
+
+      <section class="input-card">
+        <label class="field-label">월급날까지 남은 일수</label>
+        <div class="stepper">
+          <p data-role="daysDisplay" class="rate-display" aria-live="polite">
+            <span data-role="daysValue">10</span><span class="unit">일</span>
+          </p>
+          <div class="spin-buttons">
+            <button data-role="daysInc" type="button" class="spin-btn" aria-label="일수 올리기">▲</button>
+            <button data-role="daysDec" type="button" class="spin-btn" aria-label="일수 내리기">▼</button>
+          </div>
+        </div>
+
+        <label class="field-label">이번 달 남은 여유자금</label>
+        <div class="stepper">
+          <p data-role="budgetDisplay" class="rate-display" aria-live="polite">
+            <span data-role="budgetValue">200,000</span><span class="unit">원</span>
+          </p>
+          <div class="spin-buttons">
+            <button data-role="budgetInc" type="button" class="spin-btn" aria-label="금액 올리기">▲</button>
+            <button data-role="budgetDec" type="button" class="spin-btn" aria-label="금액 내리기">▼</button>
+          </div>
+        </div>
+
+        <button data-role="calcBtn" class="btn-primary">오늘 예산 계산하기</button>
+
+        <div data-role="result" class="inline-result hidden">
+          <p class="inline-result-amount" data-role="resultAmount"></p>
+          <p class="inline-result-comment" data-role="resultComment"></p>
+        </div>
+      </section>
+    </section>
+
+    <!-- 3. 직장인 30초 점심 결정 -->
+    <section id="panel-decision" class="panel hidden" data-panel="decision">
+      <h1>30초 점심 결정</h1>
+      <p class="subtitle">조건만 고르면 메뉴 하나로 정리해드려요</p>
+
+      <section class="input-card">
+        <label class="field-label">누구랑</label>
+        <div class="pill-group" data-role="soloGroup">
+          <button type="button" class="pill active" data-value="solo">혼밥</button>
+          <button type="button" class="pill" data-value="group">같이</button>
+        </div>
+
+        <label class="field-label">시간</label>
+        <div class="pill-group" data-role="timeGroup">
+          <button type="button" class="pill active" data-value="10">10분</button>
+          <button type="button" class="pill" data-value="20">20분</button>
+          <button type="button" class="pill" data-value="40">30분+</button>
+        </div>
+
+        <label class="field-label">예산</label>
+        <div class="pill-group" data-role="priceGroup">
+          <button type="button" class="pill active" data-value="1">5천원대</button>
+          <button type="button" class="pill" data-value="2">1만원대</button>
+          <button type="button" class="pill" data-value="3">1.5만원+</button>
+        </div>
+
+        <button data-role="decideBtn" class="btn-primary">30초 안에 결정하기</button>
+      </section>
+    </section>
+
+    <!-- 4. 점심값 아껴서 주식 몇 주? -->
+    <section id="panel-savings" class="panel hidden" data-panel="savings">
+      <h1>점심값 아껴서 몇 주?</h1>
+      <p class="subtitle">아낀 점심값으로 관심 종목 몇 주 살 수 있을까</p>
+
+      <section class="input-card">
+        <label class="field-label">평소 점심값</label>
+        <div class="stepper">
+          <p data-role="usualDisplay" class="rate-display" aria-live="polite">
+            <span data-role="usualValue">9,000</span><span class="unit">원</span>
+          </p>
+          <div class="spin-buttons">
+            <button data-role="usualInc" type="button" class="spin-btn" aria-label="평소 점심값 올리기">▲</button>
+            <button data-role="usualDec" type="button" class="spin-btn" aria-label="평소 점심값 내리기">▼</button>
+          </div>
+        </div>
+
+        <label class="field-label">오늘 점심값</label>
+        <div class="stepper">
+          <p data-role="todayDisplay" class="rate-display" aria-live="polite">
+            <span data-role="todayValue">6,000</span><span class="unit">원</span>
+          </p>
+          <div class="spin-buttons">
+            <button data-role="todayInc" type="button" class="spin-btn" aria-label="오늘 점심값 올리기">▲</button>
+            <button data-role="todayDec" type="button" class="spin-btn" aria-label="오늘 점심값 내리기">▼</button>
+          </div>
+        </div>
+
+        <label class="field-label">관심 종목 1주 가격</label>
+        <div class="stepper">
+          <p data-role="stockDisplay" class="rate-display" aria-live="polite">
+            <span data-role="stockValue">70,000</span><span class="unit">원</span>
+          </p>
+          <div class="spin-buttons">
+            <button data-role="stockInc" type="button" class="spin-btn" aria-label="종목 가격 올리기">▲</button>
+            <button data-role="stockDec" type="button" class="spin-btn" aria-label="종목 가격 내리기">▼</button>
+          </div>
+        </div>
+
+        <button data-role="calcBtn" class="btn-primary">몇 주 살 수 있는지 계산</button>
+
+        <div data-role="result" class="inline-result hidden">
+          <p class="inline-result-comment" data-role="resultMessage"></p>
+        </div>
+      </section>
     </section>
   </main>
 
+  <nav class="tabbar">
+    <button class="tab-btn active" data-tab="roulette">
+      <span class="tab-icon">🍱</span><span>점심룰렛</span>
+    </button>
+    <button class="tab-btn" data-tab="budget">
+      <span class="tab-icon">💰</span><span>오늘 얼마</span>
+    </button>
+    <button class="tab-btn" data-tab="decision">
+      <span class="tab-icon">⏱️</span><span>30초 결정</span>
+    </button>
+    <button class="tab-btn" data-tab="savings">
+      <span class="tab-icon">📈</span><span>절약 계산</span>
+    </button>
+  </nav>
+
+  <!-- 룰렛/30초 결정이 공유하는 결과 오버레이 -->
   <div id="resultOverlay" class="overlay hidden">
     <div id="resultCard" class="reveal-card">
       <div id="confettiLayer" class="confetti-layer"></div>
       <p class="reveal-emoji" id="resultEmoji"></p>
-      <p class="reveal-rate" id="resultRate"></p>
-      <h2 class="reveal-menu" id="resultMenu"></h2>
+      <p class="reveal-rate" id="resultLine1"></p>
+      <h2 class="reveal-menu" id="resultLine2"></h2>
       <p class="reveal-comment" id="resultComment"></p>
       <div class="reveal-actions">
         <button id="reDrawBtn" class="btn-primary">다시 뽑기</button>
-        <button id="closeBtn" class="btn-text">닫기</button>
+        <button id="closeOverlayBtn" class="btn-text">닫기</button>
       </div>
     </div>
   </div>
 
-  <script src="menuData.js"></script>
-  <script src="app.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

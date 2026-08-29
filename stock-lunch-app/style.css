@@ -28,12 +28,19 @@ body {
   width: 100%;
   max-width: 420px;
   min-height: 100vh;
-  padding: 14vh 20px 40px;
+  padding: 14vh 20px calc(40px + 76px);
   background: var(--bg);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+.panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .app h1 {
@@ -170,6 +177,112 @@ body {
 
 .hidden {
   display: none;
+}
+
+.panel.hidden {
+  display: none;
+}
+
+.field-label {
+  display: block;
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-align: left;
+}
+
+.field-label:not(:first-child) {
+  margin-top: 18px;
+}
+
+.pill-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pill {
+  flex: 1;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.1s ease, border-color 0.1s ease, color 0.1s ease;
+}
+
+.pill.active {
+  background: var(--toss-blue);
+  border-color: var(--toss-blue);
+  color: #fff;
+}
+
+.pill-group + .btn-primary {
+  margin-top: 22px;
+}
+
+.inline-result {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.inline-result-amount {
+  margin: 0 0 4px;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.inline-result-comment {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* 하단 탭바 */
+.tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  z-index: 5;
+}
+
+.tab-btn {
+  flex: 1;
+  max-width: 105px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border: none;
+  background: none;
+  color: var(--text-tertiary);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 4px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: color 0.1s ease, background 0.1s ease;
+}
+
+.tab-btn.active {
+  color: var(--toss-blue-dark);
+  background: rgba(49, 130, 246, 0.08);
+}
+
+.tab-icon {
+  font-size: 20px;
 }
 
 /* 결과 오버레이 */

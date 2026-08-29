@@ -1,9 +1,6 @@
 // 수익률 구간별 메뉴 데이터 (하드코딩, 외부 데이터/API 없음)
-// 다른 기능(예산 결정, 30초 결정, 절약 계산)을 붙일 때도
-// 이 파일 형태(구간 -> 선택지 배열)를 그대로 참고할 수 있게 분리해둠.
-
 // 구간은 위에서부터 순서대로 검사하며, minInclusive 이상이면 해당 구간으로 확정된다.
-const LUNCH_TABLE = [
+export const LUNCH_TABLE = [
   {
     id: "surge",
     label: "+3% 이상",
@@ -76,17 +73,14 @@ const LUNCH_TABLE = [
   },
 ];
 
-// rate(%) 를 받아 해당 구간 정보를 반환 (위에서부터 첫 매칭 구간)
-function getBracket(rate) {
+export function getBracket(rate) {
   return LUNCH_TABLE.find((b) => rate >= b.minInclusive);
 }
 
-// 구간 안에서 메뉴 하나를 랜덤으로 뽑아 반환
-function pickLunch(rate) {
+export function pickLunch(rate) {
   const bracket = getBracket(rate);
   const option = bracket.options[Math.floor(Math.random() * bracket.options.length)];
   return { ...option, label: bracket.label, emoji: bracket.emoji, tone: bracket.tone };
 }
 
-// 슬롯 연출용: 전체 구간의 메뉴 이름을 한 배열로 모아둠
-const ALL_MENU_NAMES = LUNCH_TABLE.flatMap((b) => b.options.map((o) => o.menu));
+export const ALL_MENU_NAMES = LUNCH_TABLE.flatMap((b) => b.options.map((o) => o.menu));
