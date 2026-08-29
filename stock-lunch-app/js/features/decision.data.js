@@ -70,6 +70,32 @@ const RAW_DECISION_MENUS = [
   { menu: "마파두부덮밥", emoji: "🌶️", solo: true, group: true, maxTime: 15, price: 8000, cuisine: "중식" },
   { menu: "팟타이", emoji: "🍤", solo: true, group: true, maxTime: 20, price: 11000, cuisine: "아시안" },
   { menu: "반미", emoji: "🥖", solo: true, group: false, maxTime: 10, price: 7000, cuisine: "아시안" },
+
+  // 중식/일식/양식/아시안이 한식 대비 너무 얇아서 보강
+  { menu: "볶음밥", emoji: "🍚", solo: true, group: true, maxTime: 15, price: 7000, cuisine: "중식" },
+  { menu: "탕수육정식", emoji: "🍖", solo: true, group: true, maxTime: 20, price: 11000, cuisine: "중식" },
+  { menu: "깐풍기덮밥", emoji: "🍗", solo: true, group: true, maxTime: 15, price: 9000, cuisine: "중식" },
+  { menu: "유린기덮밥", emoji: "🍗", solo: true, group: true, maxTime: 15, price: 9000, cuisine: "중식" },
+  { menu: "사천짜장", emoji: "🥡", solo: true, group: true, maxTime: 15, price: 8000, cuisine: "중식" },
+  { menu: "고추잡채덮밥", emoji: "🥘", solo: true, group: true, maxTime: 15, price: 9000, cuisine: "중식" },
+  { menu: "마라탕", emoji: "🌶️", solo: true, group: true, maxTime: 20, price: 10000, cuisine: "중식" },
+
+  { menu: "우동", emoji: "🍜", solo: true, group: true, maxTime: 15, price: 8000, cuisine: "일식" },
+  { menu: "규동", emoji: "🍚", solo: true, group: true, maxTime: 15, price: 9000, cuisine: "일식" },
+  { menu: "가츠동", emoji: "🍱", solo: true, group: true, maxTime: 15, price: 10000, cuisine: "일식" },
+  { menu: "텐동", emoji: "🍤", solo: true, group: true, maxTime: 15, price: 10000, cuisine: "일식" },
+  { menu: "오야코동", emoji: "🍚", solo: true, group: true, maxTime: 15, price: 9000, cuisine: "일식" },
+  { menu: "카레라이스", emoji: "🍛", solo: true, group: true, maxTime: 15, price: 8000, cuisine: "일식" },
+
+  { menu: "함박스테이크", emoji: "🥩", solo: true, group: true, maxTime: 20, price: 12000, cuisine: "양식" },
+  { menu: "리조또", emoji: "🍚", solo: true, group: true, maxTime: 20, price: 12000, cuisine: "양식" },
+  { menu: "그라탕", emoji: "🧀", solo: true, group: true, maxTime: 20, price: 11000, cuisine: "양식" },
+  { menu: "수제버거", emoji: "🍔", solo: true, group: false, maxTime: 15, price: 9000, cuisine: "양식" },
+  { menu: "브런치 플레이트", emoji: "🍳", solo: true, group: true, maxTime: 25, price: 14000, cuisine: "양식" },
+
+  { menu: "나시고렝", emoji: "🍛", solo: true, group: true, maxTime: 20, price: 10000, cuisine: "아시안" },
+  { menu: "카오만가이", emoji: "🍗", solo: true, group: true, maxTime: 20, price: 10000, cuisine: "아시안" },
+  { menu: "분짜", emoji: "🍜", solo: true, group: true, maxTime: 20, price: 10000, cuisine: "아시안" },
 ];
 
 // 5천원 이하 -> 1, 1만원 이하 -> 2, 그 이상 -> 3 (priceGroup 필터 pill 라벨과 맞춤)
