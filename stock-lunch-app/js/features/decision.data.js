@@ -7,7 +7,7 @@ const RAW_DECISION_MENUS = [
   { menu: "구내식당", emoji: "🍚", solo: true, group: true, maxTime: 15, price: 6000 },
   { menu: "라면", emoji: "🍜", solo: true, group: true, maxTime: 15, price: 5000 },
   { menu: "국밥", emoji: "🍲", solo: true, group: true, maxTime: 20, price: 9000 },
-  { menu: "샐러드", emoji: "🥗", solo: true, group: true, maxTime: 10, price: 9000 },
+  { menu: "샐러드", emoji: "🥗", solo: true, group: false, maxTime: 10, price: 9000 },
   { menu: "돈까스", emoji: "🍱", solo: true, group: true, maxTime: 20, price: 10000 },
   { menu: "초밥", emoji: "🍣", solo: true, group: true, maxTime: 25, price: 12000 },
   { menu: "부대찌개", emoji: "🍲", solo: false, group: true, maxTime: 25, price: 9000 },
@@ -49,11 +49,13 @@ export function filterMenus({ solo, timeMinutes, priceTier }) {
   const matchesTime = (m) => m.maxTime <= timeMinutes;
   const matchesPrice = (m) => m.priceTier <= priceTier;
 
+  // 혼밥/같이는 "그 자리에 몇 명이 가느냐"를 결정하는 실질적 제약이라 최후의 보루로 남겨두고,
+  // 시간 -> 예산 순으로 먼저 완화한다. (예: 같이 먹을 사람이 있는데 혼밥 메뉴가 섞여 나오면 안 됨)
   const relaxationSteps = [
     (m) => matchesGroup(m) && matchesTime(m) && matchesPrice(m), // 다 지키기
-    (m) => matchesTime(m) && matchesPrice(m), // 혼밥/같이 완화
-    (m) => matchesPrice(m), // 시간도 완화
-    () => true, // 예산도 완화 (전체 메뉴)
+    (m) => matchesGroup(m) && matchesPrice(m), // 시간 완화
+    (m) => matchesGroup(m), // 예산도 완화
+    () => true, // 혼밥/같이까지 완화 (전체 메뉴, 진짜 마지막 수단)
   ];
 
   for (const test of relaxationSteps) {
